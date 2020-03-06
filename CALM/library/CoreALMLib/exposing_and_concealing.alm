@@ -1,0 +1,67 @@
+theory exposing_and_concealing
+
+    import accessibility.accessibility from CoreALMLib
+
+    module exposing_and_concealing
+        depends on accessibility
+
+        sort declarations
+            expose :: make_accessible
+            conceal :: make_inaccessible
+
+        axioms
+            state constraints
+                -is_accessible(X) if is_concealed(X).
+                is_accessible(X) if -is_concealed(X).
+
+                -accessible_to(X, Y) if concealed_from(X, Y).
+                accessible_to(X, Y) if -concealed_from(X, Y).
+
+                concealed_from(X, Y) if is_concealed(X).
+                -concealed_from(X, Y) if -is_concealed(X).
+
+                false if instance(X, expose),
+                                object(X, O),
+                                -instance(O, tangible_entity).
+
+                false if instance(X, conceal),
+                                object(X, O),
+                                -instance(O, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -is_concealed(O) if instance(X, expose),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes -concealed_from(O, B) if instance(X, expose),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes is_concealed(O) if instance(X, conceal),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes concealed_from(O, B) if instance(X, conceal),
+                                                object(X, O),
+                                                base(X, B).
+
+            executability conditions
+                impossible occurs(X) if instance(X, expose),
+                                        object(X, O),
+			                            -defined_base(X),
+                                        -is_concealed(O).
+
+                impossible occurs(X) if instance(X, expose),
+                                        object(X, O),
+                                        base(X, O),
+                                        -concealed_from(O, B).
+
+                impossible occurs(X) if instance(X, conceal),
+                                        object(X, O),
+		  	                            -defined_base(X),
+                                        is_concealed(O).
+
+                impossible occurs(X) if instance(X, conceal),
+                                        object(X, O),
+                                        base(X, O),
+                                        concealed_from(O, B).

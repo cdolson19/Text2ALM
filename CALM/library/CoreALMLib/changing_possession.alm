@@ -1,0 +1,89 @@
+theory changing_possession
+
+    import changing_possession_fluents.changing_possession_fluents from CALMFluents
+
+    module changing_possession
+        depends on changing_possession_fluents
+
+        sort declarations
+            transfer :: actions
+            deliver :: transfer
+            lose :: transfer
+            receive :: transfer
+
+        axioms
+            state constraints
+                possesses(B, A) if held_by(A, B).
+                -possesses(B, A) if -held_by(A, B).
+
+                held_by(B, A) if instance(B, tangible_entity),
+                                possesses(A, B).
+
+                -held_by(B, A) if instance(B, tangible_entity),
+                               -possesses(A, B).
+
+                location(A, P) if held_by(A, B),
+                                location(B, P),
+                                instance(A, tangible_entity).
+
+                -location(A, P) if held_by(A, B),
+                                -location(B, P),
+                                instance(A, tangible_entity).
+
+                false if instance(X, transfer),
+                            -defined_object(X).
+
+                false if instance(X, transfer),
+                            donor(X, D),
+                            -instance(D, tangible_entity).
+
+                false if instance(X, transfer),
+                            recipient(X, Y),
+                            donor(X, Y).
+
+                false if instance(X, deliver),
+                            -defined_recipient(X).
+
+                false if instance(X, deliver),
+                            recipient(X, R),
+                            -instance(R, tangible_entity).
+
+                false if instance(X, deliver),
+                            donor(X, Y),
+                            agent(X, Y).
+
+                false if instance(X, deliver),
+                            recipient(X, Y),
+                            agent(X, Y).
+
+                false if instance(X, lose),
+                            -defined_donor(X).
+
+                false if instance(X, lose),
+                            donor(X, D),
+                            -instance(D, tangible_entity).
+
+                false if instance(X, receive),
+                            -defined_recipient(X).
+
+            dynamic causal laws
+                occurs(X) causes -possesses(D, O) if instance(X, transfer),
+                                                donor(X, D),
+                                                object(X, O).
+
+                occurs(X) causes possesses(R, O) if instance(X, transfer),
+                                                recipient(X, R),
+                                                object(X, O).
+
+            executability conditions
+                impossible occurs(X) if instance(X, transfer),
+                                        donor(X, D),
+                                        object(X, O),
+                                        -possesses(D, O).
+
+                impossible occurs(X) if instance(X, transfer),
+                                        object(X, O),
+                                        recipient(X, R),
+                                        location(R, A),
+                                        location(O, B),
+                                        A != B.

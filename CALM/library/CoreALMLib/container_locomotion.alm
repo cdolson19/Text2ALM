@@ -1,0 +1,12 @@
+theory container_locomotion
+
+    import container_motion.container_motion from CoreALMLib
+    import locomotion.locomotion from CoreALMLib
+
+    module container_locomotion
+        depends on container_motion, locomotion
+
+        sort declarations
+            go_through :: move_through, locomotion
+            enter :: move_into, locomotion
+            exit :: move_out_of, locomotion

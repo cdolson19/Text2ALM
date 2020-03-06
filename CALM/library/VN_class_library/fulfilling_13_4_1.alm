@@ -1,0 +1,51 @@
+theory fulfilling_13_4_1
+
+	import changing_possession.changing_possession from CoreALMLib
+
+	module fulfilling_13_4_1
+		depends on changing_possession
+		% VerbNet class fulfilling_13_4_1 has 4 member verbs: (leave, present, issue, trust)
+
+		sort declarations
+			fulfilling_13_4_1 :: deliver
+
+		axioms
+			state constraints
+				donor(A, B) if instance(A, fulfilling_13_4_1),
+				                vn_agent(A, B).
+				recipient(A, B) if instance(A, fulfilling_13_4_1),
+				                vn_recipient(A, B).
+				object(A, B) if instance(A, fulfilling_13_4_1),
+				                vn_theme(A, B).
+
+	module fulfilling_13_4_1_1
+		depends on fulfilling_13_4_1
+		% VerbNet class fulfilling_13_4_1_1 has 6 member verbs: (resupply, supply, serve, entrust, credit, furnish)
+
+		sort declarations
+			fulfilling_13_4_1_1 :: fulfilling_13_4_1
+
+		axioms
+			state constraints
+				donor(A, B) if instance(A, fulfilling_13_4_1_1),
+				                vn_agent(A, B).
+				recipient(A, B) if instance(A, fulfilling_13_4_1_1),
+				                vn_recipient(A, B).
+				object(A, B) if instance(A, fulfilling_13_4_1_1),
+				                vn_theme(A, B).
+
+	module fulfilling_13_4_1_2
+		depends on fulfilling_13_4_1
+		% VerbNet class fulfilling_13_4_1_2 has 1 member verbs: (provide)
+
+		sort declarations
+			fulfilling_13_4_1_2 :: fulfilling_13_4_1
+
+		axioms
+			state constraints
+				donor(A, B) if instance(A, fulfilling_13_4_1_2),
+				                vn_agent(A, B).
+				recipient(A, B) if instance(A, fulfilling_13_4_1_2),
+				                vn_recipient(A, B).
+				object(A, B) if instance(A, fulfilling_13_4_1_2),
+				                vn_theme(A, B).

@@ -1,0 +1,13 @@
+theory creating_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.content_fluents from CALMFluents
+    import fluents.part_fluents from CALMFluents
+    import property_fluents.characteristic_fluents from CALMFluents
+    import property_fluents.measurement_fluents from CALMFluents
+
+    module creating_fluents
+        depends on entity_event_and_action, content_fluents, characteristic_fluents, measurement_fluents, part_fluents
+        function declarations
+            fluents
+                basic
+                    controlled_by : entity * entity -> booleans

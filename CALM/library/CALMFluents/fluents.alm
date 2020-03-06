@@ -1,0 +1,133 @@
+theory fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+
+    module abuts_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    abuts : spatial_entity * spatial_entity -> booleans
+
+    module accessible_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    accessible_to : entity * thing -> booleans
+                    is_accessible : entity -> booleans
+
+    module confined_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    confined_to : tangible_entity * tangible_entity -> booleans
+                    is_confined : tangible_entity -> booleans
+
+    module contained_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    contained_in : tangible_entity * tangible_entity -> booleans
+                    is_confined : tangible_entity -> booleans
+
+    module location_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    location : tangible_entity * spatial_entity -> booleans
+                    is_at : entity * spatial_entity -> booleans
+        axioms
+            state constraints
+                -location(X, Y) if location(X, Z),
+                                Y != Z.
+
+    module held_by_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    held_by : tangible_entity * tangible_entity -> booleans
+                    is_held : tangible_entity -> booleans
+
+    module blocked_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    blocked_with : spatial_entity * entity -> booleans
+                    is_blocked : spatial_entity -> booleans
+
+    module is_inside_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_inside : spatial_entity * spatial_entity -> booleans
+
+    module closed_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_closed : spatial_entity -> booleans
+
+    module content_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    content :  tangible_entity * entity -> booleans
+
+    module possession_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    possesses : entity * entity -> booleans
+
+    module restrained_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_restrained : tangible_entity -> booleans
+
+    module touching_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_touching : tangible_entity * tangible_entity -> booleans
+
+    module known_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_known : entity -> booleans
+                    known_to : entity * tangible_entity -> booleans
+
+    module shut_out_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    shut_out_of : tangible_entity * tangible_entity -> booleans
+
+    module part_fluents
+        depends on entity_event_and_action, content_fluents, characteristic_fluents, measurement_fluents
+        function declarations
+            fluents
+                basic
+                    has_part : entity * entity -> booleans
+
+    module encloses_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    encloses : spatial_entity * spatial_entity -> booleans
+                    is_outside : spatial_entity * spatial_entity -> booleans

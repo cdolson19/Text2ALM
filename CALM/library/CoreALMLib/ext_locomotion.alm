@@ -1,0 +1,16 @@
+theory ext_locomotion
+
+    import locomotion.locomotion from CoreALMLib
+
+    module ext_locomotion
+        depends on locomotion
+
+        sort declarations
+            organism :: living_entity
+            animal :: organism
+
+        axioms
+            state constraints
+                false if instance(X, walk),
+                            agent(X, A),
+                            -instance(A, animal).

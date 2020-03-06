@@ -1,0 +1,6 @@
+theory perception_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.fluents from CALMFluents
+
+    module perception_fluents
+        depends on entity_event_and_action

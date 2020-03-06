@@ -1,0 +1,83 @@
+theory run_51_3_2
+
+    import locomotion.locomotion from CoreALMLib
+
+    module run_51_3_2
+        depends on locomotion
+		% VerbNet class run_51_3_2 has 96 member verbs: (amble, ambulate, backpack, bolt, bound, breeze, bustle, caper, carom, cavort, charge, chunter, clamber, climb, clump, crawl, creep, dodder, flit, flounce, frolic, gallivant, gambol, ghost, globetrot, goose_step, hike, hitchhike, hopscotch, jounce, limp, lollop, lumber, lurch, meander, mince, mosey, nip, pace, pootle, pounce, pussyfoot, roar, romp, sashay, saunter, scamper, scram, scramble, scud, scurry, scutter, scuttle, seesaw, shamble, shuffle, sidle, skedaddle, skid, skulk, sleepwalk, slink, slither, slog, slouch, somersault, spring, sprint, stagger, step, stomp, stray, streak, stumble, stump, swag, swagger, swan, swerve, tear, tiptoe, toddle, toil, tootle, totter, tread, troop, trundle, waddle, weave, wend, whiz, worm, yaw, zigzag, zoom)
+
+        sort declarations
+            run_51_3_2 :: walk
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, run_51_3_2),
+                                vn_theme(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2),
+                                vn_initial_location(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2),
+                                vn_destination(X,Y).
+                path(X, Y) if instance(X, run_51_3_2),
+                                vn_trajectory(X,Y).
+
+	module run_51_3_2_1
+		depends on run_51_3_2
+		% VerbNet class run_51_3_2_1 has 23 member verbs: (hop, journey, leap, pad, perambulate, plod, prowl, ramble, roam, rove, stride, stroll, sweep, swim, traipse, tramp, travel, trek, trudge, vault, wade, wander, wing)
+
+		sort declarations
+			run_51_3_2_1 :: run_51_3_2
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, run_51_3_2_1),
+                                vn_theme(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2_1),
+                                vn_initial_location(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2_1),
+                                vn_destination(X,Y).
+                path(X, Y) if instance(X, run_51_3_2_1),
+                                vn_trajectory(X,Y).
+
+	module run_51_3_2_2
+		depends on run_51_3_2
+		% VerbNet class run_51_3_2_1 has 30 member verbs: (back, bounce, bowl, canter, coast, dart, dash, drift, float, gallop, glide, hasten, hobble, hurry, hurtle, inch, lope, prance, race, roll, scoot, skip, skitter, slide, sneak, speed, strut, tack, trip, trot)
+
+		sort declarations
+			run_51_3_2_2 :: run_51_3_2
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, run_51_3_2_2),
+                                vn_theme(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2_2),
+                                vn_initial_location(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2_2),
+                                vn_destination(X,Y).
+                path(X, Y) if instance(X, run_51_3_2_2),
+                                vn_trajectory(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2_2),
+                                vn_result(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2_2),
+                                vn_source(X,Y).
+
+    module run_51_3_2_2_1
+		depends on run_51_3_2_2
+		% VerbNet class run_51_3_2_2_1 has 10 member verbs: (fly, jog, jump, march, parade, promenade, run, rush, walk)
+
+		sort declarations
+			run_51_3_2_2_1 :: run_51_3_2_2
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_theme(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_initial_location(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_destination(X,Y).
+                path(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_trajectory(X,Y).
+                destination(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_result(X,Y).
+                origin(X, Y) if instance(X, run_51_3_2_2_1),
+                                vn_source(X,Y).

@@ -1,0 +1,43 @@
+theory bring_11_3
+
+    import locomotion.locomotion from CoreALMLib
+
+	module bring_11_3
+		depends on locomotion
+		% VerbNet class bring_11_3 has 1 member verbs: (take)
+
+		sort declarations
+			bring_11_3 :: carry
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, bring_11_3),
+                                vn_agent(X, Y).
+                destination(X, Y) if instance(X, bring_11_3),
+                                vn_destination(X, Y).
+                origin(X, Y) if instance(X, bring_11_3),
+                                vn_initial_location(X, Y).
+                object(X, Y) if instance(X, bring_11_3),
+                                vn_instrument(X, Y).
+                object(X, Y) if instance(X, bring_11_3),
+                                vn_theme(X, Y).
+
+	module bring_11_3_1
+		depends on bring_11_3
+		% VerbNet class bring_11_3_1 has 1 member verbs: (bring)
+
+		sort declarations
+			bring_11_3_1 :: bring_11_3
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, bring_11_3_1),
+                                vn_agent(X, Y).
+                destination(X, Y) if instance(X, bring_11_3_1),
+                                vn_destination(X, Y).
+                origin(X, Y) if instance(X, bring_11_3_1),
+                                vn_initial_location(X, Y).
+                object(X, Y) if instance(X, bring_11_3_1),
+                                vn_instrument(X, Y).
+                object(X, Y) if instance(X, bring_11_3_1),
+                                vn_theme(X, Y).

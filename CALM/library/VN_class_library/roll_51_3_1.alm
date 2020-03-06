@@ -1,0 +1,21 @@
+theory roll_51_3_1
+
+    import locomotion.locomotion from CoreALMLib
+
+	module roll_51_3_1
+		depends on locomotion
+		% VerbNet class roll_51_3_1 has 23 member verbs: (nose, slide, twist, undulate, move, glide, snake, bounce, rotate, coil, wind, spin, roll, whirl, twirl, spiral, drift, revolve, soar, drop, turn, float, swing)
+
+		sort declarations
+			roll_51_3_1 :: go_to
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, roll_51_3_1),
+                                vn_agent(X, Y).
+                destination(X, Y) if instance(X, roll_51_3_1),
+                                vn_trajectory(X, Y).
+                destination(X, Y) if instance(X, roll_51_3_1),
+                                vn_result(X, Y).
+                object(X, Y) if instance(X, roll_51_3_1),
+                                vn_theme(X, Y).

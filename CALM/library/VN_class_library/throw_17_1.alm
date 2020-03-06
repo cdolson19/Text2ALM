@@ -1,0 +1,65 @@
+theory throw_17_1
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module throw_17_1
+		depends on specific_loss_of_possession
+		% VerbNet class throw_17_1 has 3 member verbs: (cast, discard, drive)
+
+		sort declarations
+			throw_17_1 :: relinquish
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, throw_17_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, throw_17_1),
+				                vn_destination(A, B).
+				origin(A, B) if instance(A, throw_17_1),
+				                vn_initial_location(A, B).
+				result(A, B) if instance(A, throw_17_1),
+				                vn_result(A, B).
+				object(A, B) if instance(A, throw_17_1),
+				                vn_theme(A, B).
+
+	module throw_17_1_1
+		depends on throw_17_1
+		% VerbNet class throw_17_1_1 has 25 member verbs: (pass, boot, smash, fire, bat, slam, pitch, flip, tap, bunt, punt, fling, chuck, lob, shoot, knock, bash, nudge, hit, slap, shove, loft, flick, sling, hurl)
+
+		sort declarations
+			throw_17_1_1 :: throw_17_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, throw_17_1_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, throw_17_1_1),
+				                vn_destination(A, B).
+				origin(A, B) if instance(A, throw_17_1_1),
+				                vn_initial_location(A, B).
+				result(A, B) if instance(A, throw_17_1_1),
+				                vn_result(A, B).
+				object(A, B) if instance(A, throw_17_1_1),
+				                vn_theme(A, B).
+
+	module throw_17_1_1_1
+		depends on throw_17_1_1
+		% VerbNet class throw_17_1_1_1 has 6 member verbs: (catapult, kick, launch, throw, tip, toss)
+
+		sort declarations
+			throw_17_1_1_1 :: throw_17_1_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, throw_17_1_1_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, throw_17_1_1_1),
+				                vn_destination(A, B).
+				origin(A, B) if instance(A, throw_17_1_1_1),
+				                vn_initial_location(A, B).
+				result(A, B) if instance(A, throw_17_1_1_1),
+				                vn_result(A, B).
+				object(A, B) if instance(A, throw_17_1_1_1),
+				                vn_theme(A, B).
+				agent(A, B) if instance(A, throw_17_1_1_1),
+				                vn_causer(A, B).

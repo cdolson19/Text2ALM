@@ -1,0 +1,15 @@
+theory storing_and_withdrawing_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.accessible_fluents from CALMFluents
+    import fluents.closed_fluents from CALMFluents
+    import fluents.content_fluents from CALMFluents
+    import fluents.encloses_fluents from CALMFluents
+
+    module storing_and_withdrawing_fluents
+        depends on entity_event_and_action, accessible_fluents,
+                closed_fluents, content_fluents, encloses_fluents
+        function declarations
+            fluents
+                basic
+                    is_stored : entity -> booleans
+                    stored_in : entity * tangible_entity -> booleans

@@ -1,0 +1,22 @@
+theory changing_position
+
+    import changing_possession_fluents.changing_possession_fluents from CALMFluents
+
+    module changing_position
+        depends on changing_possession_fluents
+
+        sort declarations
+            orient :: actions
+            fidget :: orient
+
+        axioms
+            state constraints
+                false if instance(X, orient),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+ 
+                false if instance(X, fidget),
+                            -defined_agent(X).
+
+                object(X, Y) if instance(X, fidget),
+                            agent(X, Y).

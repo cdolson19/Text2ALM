@@ -1,0 +1,129 @@
+theory unblocking_and_blocking
+
+    import accessibility.accessibility from CoreALMLib
+
+    module unblocking_and_blocking
+        depends on accessibility
+
+        sort declarations
+            unblock :: make_accessible
+            block :: make_inaccessible
+
+            open :: unblock
+            close :: block
+
+        function declarations
+            defined
+                is_unblocked : : spatial_entity -> booleans
+                unblocked_with : spatial_entity * entity -> booleans
+
+                is_open : spatial_entity -> booleans
+  
+        axioms
+            function definitions
+                is_unblocked(X) if -is_blocked(X).
+                unblocked_with(X, Y) if -blocked_with(X, Y).
+
+                is_open(X) if -is_closed(X).
+
+            state constraints
+                -is_accessible(X) if is_blocked(X).
+                is_accessible(X) if -is_blocked(X).
+
+                is_blocked(X) if is_closed(X).
+                -is_blocked(X) if -is_closed(X).
+
+                is_blocked(O) if blocked_with(O, I).
+                -blocked_with(O, I) if -is_blocked(O).
+
+                is_closed(O) if closed_with(O, I).
+                -closed_with(O, I) if -is_closed(O).
+
+                false if instance(X, block),
+                        object(X, O),
+                        -instance(O, spatial_entity).
+
+                false if instance(X, unblock),
+                        object(X, O),
+                        -instance(O, spatial_entity).
+
+                false if instance(X, close),
+                        -defined_instrument(X).
+
+                false if instance(X, close),
+                        instrument(X, I),
+                        -instance(X, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -is_blocked(O) if instance(X, unblock),
+                                                object(X, O),
+                                                -defined_instrument(X).
+
+                occurs(X) causes -blocked_with(O, I) if instance(X, unblock),
+                                                object(X, O),
+                                                instrument(X, I).
+
+                occurs(X) causes is_blocked(O) if instance(X, block),
+                                                object(X, O),
+                                                -defined_instrument(X).
+
+                occurs(X) causes blocked_with(O, I) if instance(X, block),
+                                                object(X, O),
+                                                instrument(X, I).
+
+                occurs(X) causes -is_closed(O) if instance(X, open),
+                                                object(X, O),
+                                                -defined_instrument(X).
+
+                occurs(X) causes -closed_with(X) if instance(X, open),
+                                                object(X, O),
+                                                instrument(X, I).
+
+                occurs(X) causes is_closed(O) if instance(X, close),
+                                                object(X, O),
+                                                -defined_instrument(X).
+
+                occurs(X) causes closed_with(X) if instance(X, close),
+                                                object(X, O),
+                                                instrument(X, I).
+
+            executability conditions
+                impossible occurs(X) if instance(X, unblock),
+                                    object(X, O),
+		  	                        -defined_instrument(X),
+                                    -is_blocked(O).
+
+                impossible occurs(X) if instance(X, unblock),
+                                    object(X, O),
+                                    instrument(X, I),
+                                    -blocked_with(O, I).
+
+                impossible occurs(X) if instance(X, block),
+                                    object(X, O),
+		  	                        -defined_instrument(X),
+                                    is_blocked(O).
+
+                impossible occurs(X) if instance(X, block),
+                                    object(X, O),
+                                    instrument(X, I),
+                                    blocked_with(O, I).
+
+                impossible occurs(X) if instance(X, open),
+                                    object(X, O),
+                                    -defined_instrument(X),
+                                    -is_closed(O).
+
+                impossible occurs(X) if instance(X, open),
+                                    object(X, O),
+                                    instrument(X, I),
+                                    -closed_with(O, I).
+
+                impossible occurs(X) if instance(X, close),
+                                    object(X, O),
+                                    -defined_instrument(X),
+                                    is_closed(O).
+
+                impossible occurs(X) if instance(X, close),
+                                    object(X, O),
+                                    instrument(X, I),
+                                    closed_with(O, I).

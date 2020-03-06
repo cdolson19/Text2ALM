@@ -1,0 +1,88 @@
+theory releasing_and_confining
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module releasing_and_confining
+        depends on unobstructing_and_obstructing
+
+        sort declarations
+            release :: unobstruct
+            confine :: obstruct
+
+        axioms
+            state constraints
+                is_confined(X) if confined_to(X, Y).
+                -confined_to(X, Y) if -is_confined(X).
+
+                is_obstructed(X) if is_confined(X).
+                -is_obstructed(X) if -is_confined(X).
+
+                false if instance(X, release),
+                            object(X, O),
+                            -instance(X, tangible_entity).
+
+                false if instance(X, release),
+                            -defined_base(X).
+
+                false if instance(X, release),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, confine),
+                            object(X, O),
+                            -instance(X, tangible_entity).
+
+                false if instance(X, confine),
+                            -defined_base(X).
+
+                false if instance(X, confine),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -confined_to(O, B) if instance(X, release),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -is_confined(O) if instance(X, release),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes confined_to(O, B) if instance(X, confine),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes is_confined(O) if instance(X, confine),
+                                                object(X, O),
+                                                -defined_base(X).
+  
+            executability conditions
+                impossible occurs(X) if instance(X, release),
+                                    object(X, O),
+                                    base(X, B),
+                                    -is_inside(O, B).
+
+                impossible occurs(X) if instance(X, release),
+                                    object(X, O),
+                                    base(X, B),
+                                    -confined(O, B).
+
+                impossible occurs(X) if instance(X, release),
+                                    object(X, O),
+                                    -defined_base(X),
+                                    -is_confined(O).
+
+                impossible occurs(X) if instance(X, confine),
+                                    object(X, O),
+                                    base(X, B),
+                                    -is_inside(O, B).
+
+                impossible occurs(X) if instance(X, confine),
+                                    object(X, O),
+                                    base(X, B),
+                                    confined_to(O, B).
+
+                impossible occurs(X) if instance(X, confine),
+                                    object(X, O),
+                                    -defined_base(X),
+                                    is_confined(O).

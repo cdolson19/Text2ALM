@@ -1,0 +1,42 @@
+theory get_13_5_1
+
+	import specific_gain_of_possession.specific_gain_of_possession from CoreALMLib
+
+	module get_13_5_1
+		depends on specific_gain_of_possession
+		% VerbNet class get_13_5_1 has 22 member verbs: (attain, book, buy, call, catch, charter, choose, find, gather, hire, lease, order, phone, pick, pluck, procure, pull, reach, rent, reserve, take, win)
+		sort declarations
+			get_13_5_1 :: obtain
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, get_13_5_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, get_13_5_1),
+				                vn_asset(A, B).
+				donor(A, B) if instance(A, get_13_5_1),
+				                vn_source(A, B).
+				recipient(A, B) if instance(A, get_13_5_1),
+				                vn_beneficiary(A, B).
+				object(A, B) if instance(A, get_13_5_1),
+				                vn_theme(A, B).
+
+	module get_13_5_1_1
+		depends on get_13_5_1
+		% VerbNet class get_13_5_1_1 has 8 member verbs: (earn, cash, gain, secure, get, score, save, fetch)
+
+		sort declarations
+			get_13_5_1_1 :: get_13_5_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, get_13_5_1_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, get_13_5_1_1),
+				                vn_asset(A, B).
+				recipient(A, B) if instance(A, get_13_5_1_1),
+				                vn_beneficiary(A, B).
+				donor(A, B) if instance(A, get_13_5_1_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, get_13_5_1_1),
+				                vn_theme(A, B).

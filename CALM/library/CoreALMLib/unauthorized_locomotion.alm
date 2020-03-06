@@ -1,0 +1,18 @@
+theory unauthorized_locomotion
+
+    import locomotion.locomotion from CoreALMLib
+
+    module unauthorized_locomotion
+        depends on locomotion
+
+        sort declarations
+            trespass :: go_to
+            invade :: trespass
+
+        axioms
+            state constraints
+                false if instance(X, trespass),
+                        agent(X, A),
+                        destination(X, D),
+                        possesses(P, D),
+                        A != P.

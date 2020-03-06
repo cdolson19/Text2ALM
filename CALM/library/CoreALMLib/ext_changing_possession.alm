@@ -1,0 +1,18 @@
+theory ext_changing_possession
+
+    import changing_possession.changing_possession from CoreALMLib
+
+    module ext_changing_possession
+        depends on changing_possession
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, transfer),
+                                        donor(X, D),
+                                        object(X, O),
+                                        -abuts(D, O).
+
+                impossible occurs(X) if instance(X, deliver),
+                                        agent(X, A),
+                                        object(X, O),
+                                        -abuts(A, O).

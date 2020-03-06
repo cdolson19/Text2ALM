@@ -1,0 +1,25 @@
+theory fire_10_10
+
+	import changing_possession.changing_possession from CoreALMLib
+
+	module fire_10_10
+		depends on changing_possession
+		% VerbNet class fire_10_10 has 17 member verbs: (dismiss, suspend, let_go, shitcan, give_the_boot, fire, oust, can, remove, send_away, terminate, unseat, lay_off, drop, sack, expel, force_out)
+
+		sort declarations
+			fire_10_10 :: lose
+
+		axioms
+			state constraints
+			    donor(X, Y) if instance(X, fire_10_10),
+                                vn_agent(X, Y).
+				agent(A, B) if instance(A, fire_10_10),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, fire_10_10),
+				                vn_source(A, B).
+				object(A, B) if instance(A, fire_10_10),
+				                vn_theme(A, B).
+				object(A, B) if instance(A, fire_10_10),
+				                vn_goal(A, B).
+				object(A, B) if instance(A, fire_10_10),
+				                vn_attribute(A, B).

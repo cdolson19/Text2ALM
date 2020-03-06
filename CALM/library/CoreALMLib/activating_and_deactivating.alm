@@ -1,0 +1,32 @@
+theory activating_and_deactivating
+
+    import accessibility.accessibility from CoreALMLib
+
+    module activating_and_deactivating
+        depends on accessibility
+
+        sort declarations
+            activate :: make_accessible
+            deactivate :: make_inaccessible
+
+        axioms
+            state constraints
+                is_accessible(X) if is_activated(X).
+
+                -is_accessible(X) if -is_activated(X).
+
+            dynamic causal laws
+                occurs(X) causes is_activated(O) if instance(X, activate),
+                                        object(X, O).
+
+                occurs(X) causes -is_activated(O) if instance(X, deactivate),
+                                         object(X, O).
+
+            executability conditions
+                impossible occurs(X) if instance(X, activate),
+                                        object(X, O),
+                                        is_activated(O).
+
+                impossible occurs(X) if instance(X, deactivate),
+                                        object(X, O),
+                                        -is_activated(O).

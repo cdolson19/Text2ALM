@@ -1,0 +1,25 @@
+theory ext_contact_and_attachment
+
+    import contact_and_attachment.contact_and_attachment from CoreALMLib
+
+    module ext_contact_and_attachment
+        depends on contact_and_attachment
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, attach),
+                                        base(X, B),
+                                        -is_accessible(B).
+
+                impossible occurs(X) if instance(X, make_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        location(O, L),
+                                        -location(B, L).
+
+                impossible occurs(X) if instance(X, make_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        -location(O, L),
+                                        location(B, L).
+ 

@@ -1,0 +1,51 @@
+theory temperature_increasing_and_decreasing
+
+    import increasing_and_decreasing.increasing_and_decreasing from CoreALMLib
+
+    module temperature_increasing_and_decreasing
+        depends on increasing_and_decreasing
+
+        sort declarations
+            heat :: increase
+
+            cool :: decrease
+
+        axioms
+            state constraints
+                affected_property(X) = temperature if instance(X, heat).
+
+                false if instance(X, heat),
+                        from_value(X, FV),
+                        -instance(FV, temperature_value).
+
+                false if instance(X, heat),
+                        -defined_base(X).
+
+                false if instance(X, heat),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+                affected_property(X) = temperature if instance(X, cool).
+
+                false if instance(X, cool),
+                        from_value(X, FV),
+                        -instance(FV, temperature_value).
+
+                false if instance(X, cool),
+                        -defined_base(X).
+
+                false if instance(X, cool),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+            executability conditions
+                impossible occurs(X) if instance(X, heat),
+                                    from_value(X, FV),
+                                    base(X, B),
+                                    -temperature(B, FV).
+
+                impossible occurs(X) if instance(X, cool),
+                                    from_value(X, FV),
+                                    base(X, B),
+                                    -temperature(B, FV).
+    

@@ -1,0 +1,102 @@
+theory communication
+
+    import communication_fluents.communication_fluents from CALMFluents
+
+    module communication
+        depends on communication_fluents
+
+        sort declarations
+            express :: actions
+
+            command :: express
+            inquire :: express
+            lie :: express
+            write :: express
+
+            deceive :: lie
+
+            intangible_entity :: entity
+            conceptual_entity :: intangible_entity
+            message :: conceptual_entity
+            information :: conceptual_entity
+
+            language :: intangible_entity
+
+            document :: message
+
+        function declarations
+            statics
+                basic
+                    information_language : message * language -> booleans
+                    truth : information -> booleans
+    
+        axioms
+            function definitions
+                known_to(X, Y) if is_known(X).
+                -known_to(X, Y) if -is_known(X).
+
+            state constraints
+                false if instance(X, express),
+                            -defined_agent(X).
+
+                false if instance(X, express),
+                            agent(X, A),
+                            instance(A, tangible_entity).
+
+                false if instance(X, express),
+                            -defined_object(X).
+
+                false if instance(X, express),
+                            object(X, O),
+                            instance(O, information).
+
+                false if instance(X, express),
+                            -defined_result(X).
+
+                false if instance(X, express),
+                            result(X, R),
+                            instance(R, message).
+
+                false if instance(X, express),
+                            recipient(X, Re),
+                            instance(Re, tangible_entity).
+
+                false if instance(X, command),
+                            -defined_recipient(X).
+
+                false if instance(X, command),
+                            recipient(X, R),
+                            -instance(R, tangible_entity).
+
+                false if instance(X, inquire),
+                            -defined_recipient(X).
+
+                false if instance(X, inquire),
+                            recipient(X, R),
+                            -instance(R, tangible_entity).
+
+                truth(O) = false if instance(X, lie),
+                            object(X, O).
+
+                false if instance(X, deceive),
+                            -defined_recipient(X).
+
+                false if instance(X, deceive),
+                            recipient(X, R),
+                            -instance(R, tangible_entity).
+
+                false if instance(X, write),
+                            result(X, R),
+                            -instance(R, document).
+
+            executability conditions
+                impossible occurs(X) if instance(X, express),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -known_to(O, A).
+
+                impossible occurs(X) if instance(X, express),
+                                        agent(X, A),
+                                        result(X, R),
+                                        information_language(R, L),
+                                        -known_to(L, A).

@@ -1,0 +1,120 @@
+theory container_motion
+
+    import motion.motion from CoreALMLib
+
+    module container_motion
+        depends on motion
+
+        sort declarations
+            move_through :: move
+            move_into :: move_through
+            move_out_of :: move_through
+
+        function declarations
+            statics
+                basic
+                    has_region : tangible_entity * spatial_entity -> booleans
+
+        axioms
+            state constraints
+                is_contained(X) if contained_in(X, B).
+
+
+                false if instance(X, move_through),
+                                -defined_base(X).
+
+                false if instance(X, move_through),
+                                base(X, B),
+                                -instance(B, tangible_entity).
+
+                path(X, P) if instance(X, move_through),
+                                base(X, B),
+                                has_region(B, P).
+
+                false if instance(X, move_into),
+                                -defined_destination(X).
+
+                false if instance(X, move_into),
+                                destination(X, D),
+                                base(X, B),
+                                -is_inside(D, B).
+
+                false if instance(X, move_into),
+                                -defined_origin(X).
+
+                false if instance(X, move_into),
+                                origin(X, Or),
+                                base(X, B),
+                                -is_outside(Or, B).
+
+                false if instance(X, move_out_of),
+                                -defined_destination(X).
+
+                false if instance(X, move_out_of),
+                                destination(X, D),
+                                base(X, B),
+                                -is_outside(D, B).
+
+                false if instance(X, move_out_of),
+                                -defined_origin(X).
+
+                false if instance(X, move_out_of),
+                                origin(X, Or),
+                                base(X, B),
+                                -is_inside(Or, B).
+
+            dynamic causal laws
+                occurs(X) causes content(B, O) if instance(X, move_into),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes contained_in(O, B) if instance(X, move_into),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -content(B, O) if instance(X, move_out_of),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -contained_in(O, B) if instance(X, move_out_of),
+                                                object(X, O),
+                                                base(X, B).
+
+            executability conditions
+                impossible occurs(X) if instance(X, move_into),
+                                        object(X, O),
+                                        base(X, B),
+                                        contained_in(O, B).
+
+                impossible occurs(X) if instance(X, move_into),
+                                        object(X, O),
+                                        base(X, B),
+                                        content(B, O).
+
+                impossible occurs(X) if instance(X, move_into),
+                                        object(X, O),
+                                        base(X, B),
+                                        shut_out_of(O, B).
+
+                impossible occurs(X) if instance(X, move_into),
+                                        path(X, P),
+                                        is_closed(P).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        object(X, O),
+                                        base(X, B),
+                                        -contained_in(O, B).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        object(X, O),
+                                        base(X, B),
+                                        -content(B, O).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        object(X, O),
+                                        base(X, B),
+                                        confined_to(O, B).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        path(X, P),
+                                        is_closed(P).

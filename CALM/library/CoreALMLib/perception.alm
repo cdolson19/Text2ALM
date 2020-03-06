@@ -1,0 +1,18 @@
+theory perception
+
+    import perception_fluents.perception_fluents from CALMFluents
+
+    module perception
+        depends on perception_fluents
+        sort declarations
+            perceive :: actions
+            recognize :: perceive
+
+        axioms
+            state constraints
+                false if instance(X, perceive),
+                        -defined_object(X).
+
+                false if instance(X, perceive),
+                        agent(X, A),
+                        -instance(X, tangible_entity).

@@ -1,0 +1,13 @@
+theory ext_creating
+
+    import creating.creating from CoreALMLib
+
+    module ext_creating
+        depends on creating
+  
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, produce),
+                                    raw_material(X, RM),
+                                    agent(X, A),
+                                    -controlled_by(RM, A).

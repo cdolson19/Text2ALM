@@ -1,0 +1,37 @@
+theory ext_storing_and_withdrawing
+
+    import storing_and_withdrawing.storing_and_withdrawing from CoreALMLib
+
+    module ext_storing_and_withdrawing
+        depends on storing_and_withdrawing
+
+        axioms
+            state constraints
+                accessible_to(X, Y) if is_accessible(X).
+                -accessible_to(X, Y) if -is_accessible(X).
+
+                -encloses(Y, X) if encloses(X, Y), X != Y.
+
+            executability conditions
+                impossible occurs(X) if instance(X, store),
+                                        object(X, O),
+                                        base(X, B),
+                                        -is_outside(O, B).
+
+                impossible occurs(X) if instance(X, store),
+                                        base(X, B),
+                                        is_closed(B).
+
+                impossible occurs(X) if instance(X, withdraw),
+                                        base(X, B),
+                                        -is_accessible(B).
+
+                impossible occurs(X) if instance(X, withdraw),
+                                        agent(X, A),
+                                        base(X, B),
+                                        -accessible_to(B, A).
+
+                impossible occurs(X) if instance(X, withdraw),
+                                        object(X, O),
+                                        base(X, B),
+                                        -encloses(B, O).

@@ -1,0 +1,19 @@
+theory ext_letting_go_and_taking_hold
+
+    import letting_go_and_taking_hold.letting_go_and_taking_hold from CoreALMLib
+
+    module ext_letting_go_and_taking_hold
+        depends on letting_go_and_taking_hold
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, let_go_of),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -is_at(A, O).
+
+                impossible occurs(X) if instance(X, take_hold),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -is_at(O, A).
+      

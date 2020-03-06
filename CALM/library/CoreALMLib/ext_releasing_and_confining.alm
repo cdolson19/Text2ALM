@@ -1,0 +1,22 @@
+theory ext_releasing_and_confining
+
+    import releasing_and_confining.releasing_and_confining from CoreALMLib
+
+    module ext_releasing_and_confining
+        depends on releasing_and_confining
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, confine),
+                                        object(X, O),
+                                        site(X, L),
+                                        shut_out_of(O, L).
+
+                impossible occurs(X) if instance(X, confine),
+                                        site(X, L),
+                                        is_closed(L).
+
+                impossible occurs(X) if instance(X, confine),
+                                        object(X, O),
+                                        site(X, L),
+                                        -contained_in(O, L).

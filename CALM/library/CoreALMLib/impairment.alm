@@ -1,0 +1,43 @@
+theory impairment
+
+    import impairment_fluents.impairment_fluents from CALMFluents
+
+    module impairment
+        depends on impairment_fluents
+
+        sort declarations
+            impair :: actions
+            repair :: actions
+
+        axioms
+            state constraints
+                is_broken(X) if is_ruined(X).
+
+                -is_ruined(X) if -is_broken(X).
+
+                false if instance(X, impair),
+                            -defined_object(X).
+
+                false if instance(X, impair),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, repair),
+                            -defined_object(X).
+
+                false if instance(X, repair),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -is_broken(O) if instance(X, repair),
+                                                object(X, O).
+
+            executability conditions
+                impossible occurs(X) if instance(X, repair),
+                                        object(X, O),
+                                        -is_broken(O).
+
+                impossible occurs(X) if instance(X, repair),
+                                        object(X, O),
+                                        is_ruined(O).

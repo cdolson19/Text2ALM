@@ -1,0 +1,39 @@
+theory steal_10_5
+
+	import specific_gain_of_possession.specific_gain_of_possession from CoreALMLib
+
+	module steal_10_5
+		depends on specific_gain_of_possession
+		% VerbNet class steal_10_5 has 39 member verbs: (abduct, annex, bleed, cabbage, carjack, commandeer, confiscate, cull, emancipate, embezzle, extort, filch, highjack, kidnap, knock_off, liberate, lift, milk, misappropriate, nobble, pickpocket, pinch, plagiarize, plunder, purloin, recapture, reclaim, recoup, redeem, repossess, rescue, rob, rustle, seize, sequester, snatch_away, take, thieve, wrest)
+
+		 sort declarations
+			steal_10_5 :: obtain
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, steal_10_5),
+				                vn_agent(A, B).
+				beneficiary(A, B) if instance(A, steal_10_5),
+				                vn_beneficiary(A, B).
+				donor(A, B) if instance(A, steal_10_5),
+				                vn_source(A, B).
+				object(A, B) if instance(A, steal_10_5),
+				                vn_theme(A, B).
+
+	module steal_10_5_1
+		depends on steal_10_5
+		% VerbNet class steal_10_5_1 has 18 member verbs: (cadge, snatch, steal, nick, flog, shoplift, hook, grab, salvage, pirate, sneak, swipe, wangle, pilfer, nab, capture, smuggle, cop)
+
+		sort declarations
+			steal_10_5_1 :: steal_10_5
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, steal_10_5_1),
+				                vn_agent(A, B).
+				beneficiary(A, B) if instance(A, steal_10_5_1),
+				                vn_beneficiary(A, B).
+				donor(A, B) if instance(A, steal_10_5_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, steal_10_5_1),
+				                vn_theme(A, B).

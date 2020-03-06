@@ -1,0 +1,35 @@
+theory ext_container_motion
+
+    import container_motion.container_motion from CoreALMLib
+
+    module ext_container_motion
+        depends on container_motion
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, move_through),
+                                        base(X, B),
+                                        -is_accessible(B).
+
+                impossible occurs(X) if instance(X, move_into),
+                                        base(X, B),
+                                        is_closed(B).
+
+                impossible occurs(X) if instance(X, move_into),
+                                        object(X, O),
+                                        base(X, B),
+                                        -is_outside(O, B).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        base(X, B),
+                                        is_closed(B).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        object(X, O),
+                                        base(X, B),
+                                        -is_inside(O, B).
+
+                impossible occurs(X) if instance(X, move_out_of),
+                                        object(X, O),
+                                        base(X, B),
+                                        -shut_out_of(O, B).

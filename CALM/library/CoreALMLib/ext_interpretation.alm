@@ -1,0 +1,13 @@
+theory ext_interpretation
+
+    import interpretation.interpretation from CoreALMLib
+
+    module ext_interpretation
+        depends on interpretation from CoreALMLib
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, learn),
+                                    agent(X, A),
+                                    object(X, O),
+                                    known_to(O, A).

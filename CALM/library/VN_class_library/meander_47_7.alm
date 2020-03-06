@@ -1,0 +1,31 @@
+theory meander_47_7
+
+    import locomotion.locomotion from CoreALMLib
+
+    module meander_47_7
+        depends on locomotion
+        % VerbNet class meander_47_7 has 27 member verbs: (angle, cascade, crawl, crest, cross, cut, dive, edge, emerge, fall, go, lance, mount, pass, range, round, skirt, straggle, stretch, sweep, tumble, veer, wander, weave, wind, zag, zig)
+
+        sort declarations
+            meander_47_7 :: go_to
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, meander_47_7),
+                                vn_theme(X, Y).
+                destination(X, Y) if instance(X, meander_47_7),
+                                vn_location(X, Y).
+
+    module meander_47_7_1
+        depends on meander_47_7
+	    % VerbNet class meander_47_7_1 has 20 member verbs: (ascend, bend, climb, converge, crisscross, descend, dip, drop, meander, plummit, plunge, rise, run, slant, snake, swerve, turn, twist, undulate, zigzag)
+
+        sort declarations
+            meander_47_7_1 :: meander_47_7
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, meander_47_7_1),
+                                vn_theme(X, Y).
+                destination(X, Y) if instance(X, meander_47_7_1),
+                                vn_location(X, Y).

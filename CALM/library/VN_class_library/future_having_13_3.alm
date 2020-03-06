@@ -1,0 +1,43 @@
+theory future_having_13_3
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module future_having_13_3
+		depends on specific_loss_of_possession
+		% VerbNet class future_having_13_3 has 4 member verbs: (accord, devolve, portion-out, ration)
+
+		sort declarations
+			future_having_13_3 :: relinquish
+
+		axioms
+			state constraints
+                donor(A, B) if instance(A, future_having_13_3),
+				                vn_agent(A, B).
+				agent(A, B) if instance(A, future_having_13_3),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, future_having_13_3),
+				                vn_goal(A, B).
+				object(A, B) if instance(A, future_having_13_3),
+				                vn_theme(A, B).
+                beneficiary(A, B) if instance(A, future_having_13_3),
+				                vn_beneficiary(A, B).
+
+    module future_having_13_3_1
+		depends on future_having_13_3
+		% VerbNet class future_having_13_3_1 has 23 member verbs: (advance, allocate, allot, allow, apportion, assign, award, bequeath, cede, concede, extend, grant, guarantee, issue, leave, offer, owe, promise, reallocate, reassign, vote, will, yield)
+
+		sort declarations
+			future_having_13_3_1 :: future_having_13_3
+
+		axioms
+			state constraints
+			    donor(A, B) if instance(A, future_having_13_3_1),
+				                vn_agent(A, B).
+				agent(A, B) if instance(A, future_having_13_3_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, future_having_13_3_1),
+				                vn_goal(A, B).
+				object(A, B) if instance(A, future_having_13_3_1),
+				                vn_theme(A, B).
+                beneficiary(A, B) if instance(A, future_having_13_3_1),
+				                vn_beneficiary(A, B).

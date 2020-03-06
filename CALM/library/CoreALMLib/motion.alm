@@ -1,0 +1,377 @@
+theory motion
+
+    import motion_fluents.motion_fluents from CALMFluents
+
+    module motion
+        depends on motion_fluents
+
+        sort declarations
+            move :: actions
+
+        axioms
+            function definitions
+
+            state constraints
+                is_near(X, Y) if is_near(Y, X).
+                -is_near(X, Y) if -is_near(Y, X).
+
+                abuts(X, Y) if abuts(Y, X).
+                -abuts(X, Y) if -abuts(Y, X).
+
+                is_beside(X, Y) if is_beside(Y, X).
+                -is_beside(X, Y) if -is_beside(Y, X).
+
+                is_opposite(X, Y) if is_opposite(Y, X).
+                -is_opposite(X, Y) if -is_opposite(Y, X).
+
+                -is_above(Y, X) if is_above(X, Y),
+                                    X != Y.
+
+                -is_below(Y, X) if is_below(X, Y),
+                                    X != Y.
+
+                -is_behind(Y, X) if is_behind(X, Y),
+                                    X != Y.
+
+                -is_in_front_of(Y, X) if is_in_front_of(X, Y),
+                                    X != Y.
+
+                -is_inside(Y, X) if is_inside(X, Y),
+                                    X != Y.
+
+                -is_over(Y, X) if is_over(X, Y),
+                                    X != Y.
+
+                -is_under(Y, X) if is_under(X, Y),
+                                    X != Y.
+
+                -is_on(Y, X) if is_on(X, Y),
+                                    X != Y.
+
+                -encloses(Y, X) if encloses(X, Y),
+                                    X != Y.
+
+                false if instance(X, move),
+                            -defined_object(X).
+
+                false if instance(X, move),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, move),
+                            origin(X, Or),
+                            -instance(Or, spatial_entity).
+
+                false if instance(X, move),
+                            destination(X, D),
+                            -instance(D, spatial_entity).
+
+                false if instance(X, move),
+                            away_from(X, Aw),
+                            -instance(Aw, spatial_entity).
+
+                false if instance(X, move),
+                            toward(X, T),
+                            -instance(T, spatial_entity).
+
+                false if instance(X, move),
+                            path(X, P),
+                            -instance(P, spatial_entity).
+
+                false if instance(X, move),
+                            object(X, Y),
+                            origin(X, Y).
+
+                false if instance(X, move),
+                            object(X, Y),
+                            destination(X, Y).
+
+                false if instance(X, move),
+                            object(X, Y),
+                            away_from(X, Y).
+
+                false if instance(X, move),
+                            object(X, Y),
+                            toward(X, Y).
+
+                false if instance(X, move),
+                            object(X, Y),
+                            path(X, Y).
+
+                -origin(X, Or1) if instance(X, move),
+                                    origin(X, Or),
+                                    Or1 != Or.
+
+                -destination(X, D1) if instance(X, move),
+                                    destination(X, D),
+                                    D1 != D.
+
+            dynamic causal laws
+                occurs(X) causes location(O, D) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes location(O, P) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                -instance(D, tangible_entity),
+                                                location(D, P).
+
+                occurs(X) causes is_near(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_near(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_above(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_above(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_below(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_below(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_along(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_along(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_at(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_at(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_beside(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_beside(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_along(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_along(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_between(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_between(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_behind(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_behind(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_in_front_of(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_in_front_of(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_inside(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_inside(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_on(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_on(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_opposite(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_opposite(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_outside(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_outside(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -encloses(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                -encloses(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_over(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_over(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes is_under(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                destination(X, D),
+                                                is_under(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -location(O, L) if instance(X, move),
+                                                object(X, O),
+                                                location(O, L).
+
+                occurs(X) causes -is_near(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_near(O, Y),
+                                                destination(X, D),
+                                                -is_near(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -abuts(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                abuts(O, Y),
+                                                destination(X, D),
+                                                -abuts(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_above(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_above(O, Y),
+                                                destination(X, D),
+                                                -is_above(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_below(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_below(O, Y),
+                                                destination(X, D),
+                                                -is_below(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_along(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_along(O, Y),
+                                                destination(X, D),
+                                                -is_along(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_at(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_at(O, Y),
+                                                destination(X, D),
+                                                -is_at(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_between(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_between(O, Y),
+                                                destination(X, D),
+                                                -is_between(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_behind(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_behind(O, Y),
+                                                destination(X, D),
+                                                -is_behind(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_in_front_of(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_in_front_of(O, Y),
+                                                destination(X, D),
+                                                -is_in_front_of(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_inside(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_inside(O, Y),
+                                                destination(X, D),
+                                                -is_inside(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -encloses(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                encloses(O, Y),
+                                                destination(X, D),
+                                                -encloses(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_on(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_on(O, Y),
+                                                destination(X, D),
+                                                -is_on(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -encloses(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                encloses(O, Y),
+                                                destination(X, D),
+                                                -encloses(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_opposite(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_opposite(O, Y),
+                                                destination(X, D),
+                                                -is_opposite(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_outside(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_outside(O, Y),
+                                                destination(X, D),
+                                                -is_outside(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_over(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_over(O, Y),
+                                                destination(X, D),
+                                                -is_over(D, Y),
+                                                instance(D, spatial_entity).
+
+                occurs(X) causes -is_under(O, Y) if instance(X, move),
+                                                object(X, O),
+                                                is_under(O, Y),
+                                                destination(X, D),
+                                                -is_under(D, Y),
+                                                instance(D, spatial_entity).
+
+            executability conditions
+                impossible occurs(X) if instance(X, move),
+                                           object(X, O),
+                                           origin(X, Or),
+                                           instance(Or, spatial_entity),
+                                           -location(O, Or).
+
+                impossible occurs(X) if instance(X, move),
+                                            object(X, O),
+                                            origin(X, Or),
+                                            instance(Or, tangible_entity),
+                                            location(Or, P),
+                                            -location(O, P).
+
+                impossible occurs(X) if instance(X, move),
+                                           object(X, O),
+                                           is_held(O),
+                                           -defined_agent(X).
+
+                impossible occurs(X) if instance(X, move),
+                                            object(X, O),
+                                            is_held(O),
+                                            agent(X, A),
+                                            -held_by(O, A).
+
+                impossible occurs(X) if instance(X, move),
+                                           object(X, O),
+                                           is_restrained(O).
+
+                impossible occurs(X) if instance(X, move),
+                                           path(X, P),
+                                           is_blocked(P).

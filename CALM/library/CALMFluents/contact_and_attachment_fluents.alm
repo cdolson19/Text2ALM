@@ -1,0 +1,13 @@
+theory contact_and_attachment_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.abuts_fluents from CALMFluents
+    import fluents.accessible_fluents from CALMFluents
+    import fluents.touching_fluents from CALMFluents
+
+    module contact_and_attachment_fluents
+        depends on entity_event_and_action, abuts_fluents,
+                accessible_fluents, touching_fluents
+        function declarations
+            fluents
+                basic
+                    is_attached_to : tangible_entity * tangible_entity -> booleans

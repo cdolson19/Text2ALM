@@ -1,0 +1,37 @@
+theory embodying
+
+    import creating.creating from CoreALMLib
+
+    module embodying
+        depends on creating
+
+        sort declarations
+            embody :: create
+            speak :: embody
+
+            energy :: tangible_entity
+            sound :: energy
+
+        axioms
+            state constraints
+                false if instance(X, embody),
+                        -defined_object(X).
+
+                false if instance(X, embody),
+                        object(X, O),
+                        -instance(O, message).
+
+                false if instance(X, embody),
+                        result(X, R),
+                        -instance(R, tangible_entity).
+
+                false if instance(X, speak),
+                        result(X, R),
+                        -instance(R, sound).
+
+                false if instance(X, speak),
+                        -defined_agent(X).
+
+                false if instance(X, speak),
+                        agent(X, A),
+                        -instance(A, tangible_entity).

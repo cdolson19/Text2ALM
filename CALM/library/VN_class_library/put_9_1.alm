@@ -1,0 +1,58 @@
+theory put_9_1
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module put_9_1
+		depends on specific_loss_of_possession
+		% VerbNet class put_9_1 has 13 member verbs: (station, mount, lodge, arrange, superimpose, tack_on, situate, implant, wharf, sling, immerse, position, emplace)
+
+		sort declarations
+			put_9_1 :: relinquish
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, put_9_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, put_9_1),
+				                vn_destination(A, B).
+				object(A, B) if instance(A, put_9_1),
+				                vn_theme(A, B).
+                origin(A, B) if instance(A, put_9_1),
+				                vn_initial_location(A, B).
+
+	module put_9_1_1
+		depends on put_9_1
+		% VerbNet class put_9_1_1 has 12 member verbs: (apply, build-in, bury, deposit, embed, insert, park, plant, reinstall, stash, stow)
+
+		sort declarations
+			put_9_1_1 :: put_9_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, put_9_1_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, put_9_1_1),
+				                vn_destination(A, B).
+				object(A, B) if instance(A, put_9_1_1),
+				                vn_theme(A, B).
+                origin(A, B) if instance(A, put_9_1_1),
+				                vn_initial_location(A, B).
+
+	module put_9_1_2
+		depends on put_9_1
+		% VerbNet class put_9_1_2 has 4 member verbs: (place, put, set, stick)
+
+		sort declarations
+			put_9_1_2 :: put_9_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, put_9_1_2),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, put_9_1_2),
+				                vn_destination(A, B).
+				object(A, B) if instance(A, put_9_1_2),
+				                vn_theme(A, B).
+				origin(A, B) if instance(A, put_9_1_2),
+				                vn_initial_location(A, B).
+

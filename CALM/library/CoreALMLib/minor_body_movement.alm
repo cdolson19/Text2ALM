@@ -1,0 +1,31 @@
+theory minor_body_movement
+
+    import changing_position.changing_position from CoreALMLib
+    import embodying.embodying from CoreALMLib
+
+
+    module minor_body_movement
+        depends on changing_position, embodying
+
+        sort declarations
+            gesticulate :: orient, embody
+            head_nod :: gesticulate
+            head_shake :: gesticulate
+
+            light :: energy
+
+        axioms
+            state constraints
+                false if instance(X, gesticulate),
+                            -defined_agent(X).
+
+                false if instance(X, gesticulate),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+                false if instance(X, gesticulate),
+                            -defined_instrument(X).
+
+                false if instance(X, gesticulate),
+                            result(X, A),
+                            -instance(A, light).

@@ -1,0 +1,71 @@
+theory specific_loss_of_possession
+
+    import changing_possession.changing_possession from CoreALMLib
+
+    module specific_loss_of_possession
+        depends on changing_possession
+
+        sort declarations
+            relinquish :: lose
+
+            give :: relinquish
+            donate :: give
+
+            supply :: relinquish
+            feed :: supply
+
+        axioms
+            state constraints
+                false if instance(X, relinquish),
+                        -defined_agent(X).
+
+                false if instance(X, relinquish),
+                        agent(X, A),
+                        -instance(A, tangible_entity).
+
+                false if instance(X, relinquish),
+                        donor(X, D1),
+                        donor(X, D2),
+                        D1 != D2.
+
+                false if instance(X, relinquish),
+                        agent(X, A),
+                        donor(X, D),
+                        A != D.
+
+                donor(X, Y) if instance(X, relinquish),
+                        agent(X, Y).
+
+                false if instance(X, give),
+                        -defined_recipient(X).
+
+                false if instance(X, give),
+                        recipient(X, R),
+                        -instance(R, tangible_entity).
+
+                false if instance(X, donate),
+                        -defined_beneficiary(X).
+
+                false if instance(X, donate),
+                        beneficiary(X, B),
+                        -instance(B, tangible_entity).
+
+                false if instance(X, supply),
+                        object(X, O),
+                        -instance(O, tangible_entity).
+
+                false if instance(X, supply),
+                        recipient(X, R),
+                        -instance(R, tangible_entity).
+
+                false if instance(X, feed),
+                        -defined_recipient(X).
+
+                false if instance(X, feed),
+                        recipient(X, R),
+                        -instance(R, living_entity).
+
+                false if instance(X, feed),
+                        donor(X, D),
+                        -instance(D, living_entity).
+             

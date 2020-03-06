@@ -1,0 +1,39 @@
+theory unobstructing_and_obstructing
+
+    import accessibility.accessibility from CoreALMLib
+
+    module unobstructing_and_obstructing
+        depends on accessibility
+
+        sort declarations
+            unobstruct :: make_accessible
+            obstruct :: make_inaccessible
+
+        axioms
+            state constraints
+                -is_accessible(X) if is_obstructed(X).
+                is_accessible(X) if -is_obstructed(X).
+
+                false if instance(X, obstruct),
+                        object(X, O),
+                        -instance(X, spatial_entity).
+
+                false if instance(X, unobstruct),
+                        object(X, O),
+                        -instance(X, spatial_entity).
+  
+            dynamic causal laws
+                occurs(X) causes -is_obstructed(O) if instance(X, unobstruct),
+                                                object(X, O).
+
+                occurs(X) causes is_obstructed(O) if instance(X, obstruct),
+                                                object(X, O).
+
+            executability conditions
+                impossible occurs(X) if instance(X, unobstruct),
+                                                object(X, O),
+                                                -is_obstructed(O).
+
+                impossible occurs(X) if instance(X, obstruct),
+                                                object(X, O),
+                                                is_obstructed(O).

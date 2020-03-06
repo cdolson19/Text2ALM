@@ -1,0 +1,35 @@
+theory leave_51_2
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module leave_51_2
+		depends on specific_loss_of_possession
+		% VerbNet class leave_51_2 has 2 member verbs: (abandon, split)
+
+		sort declarations
+			leave_51_2 :: relinquish
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, leave_51_2),
+				                vn_theme(A, B).
+				object(A, B) if instance(A, leave_51_2),
+				                vn_source(A, B).
+				object(A, B) if instance(A, leave_51_2),
+				                vn_goal(A, B).
+
+	module leave_51_2_1
+		depends on leave_51_2
+		% VerbNet class leave_51_2_1 has 2 member verbs: (desert, leave)
+
+		sort declarations
+			leave_51_2_1 :: leave_51_2
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, leave_51_2_1),
+				                vn_theme(A, B).
+				object(A, B) if instance(A, leave_51_2_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, leave_51_2_1),
+				                vn_goal(A, B).

@@ -1,0 +1,94 @@
+theory escape_51_1
+
+    import locomotion.locomotion from CoreALMLib
+    import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module escape_51_1
+		depends on locomotion
+		% VerbNet class escape_51_1 has 3 member verbs: (cut, get, make_it)
+
+		sort declarations
+			escape_51_1 :: go_to
+
+		axioms
+			state constraints
+				destination(A, B) if instance(A, escape_51_1),
+								vn_destination(A, B).
+				origin(A, B) if instance(A, escape_51_1),
+								vn_initial_location(A, B).
+				agent(A, B) if instance(A, escape_51_1),
+								vn_theme(A, B).
+				path(A, B) if instance(A, escape_51_1),
+								vn_trajectory(A, B).
+
+	module escape_51_1_1
+		depends on escape_51_1, specific_loss_of_possession
+		% VerbNet class escape_51_1_1 has 23 member verbs: (advance, approach, arrive, bolt, come, continue, decamp, emerge, emigrate, fall, file, go, plunge, recede, retreat, return, rise, set_off, set_out, skedaddle, tumble, vamoose, withdraw)
+
+		sort declarations
+			escape_51_1_1 :: escape_51_1
+
+		axioms
+			state constraints
+				destination(A, B) if instance(A, escape_51_1_1),
+								vn_destination(A, B).
+				origin(A, B) if instance(A, escape_51_1_1),
+								vn_initial_location(A, B).
+				agent(A, B) if instance(A, escape_51_1_1),
+								vn_theme(A, B).
+				path(A, B) if instance(A, escape_51_1_1),
+								vn_trajectory(A, B).
+
+	module escape_51_1_1_1
+		depends on escape_51_1_1
+		% VerbNet class escape_51_1_1_1 has 7 member verbs: (depart, disembark, escape, exit, flee, leave, vacate)
+
+		sort declarations
+			escape_51_1_1_1 :: escape_51_1_1
+
+		axioms
+			state constraints
+				destination(A, B) if instance(A, escape_51_1_1_1),
+								vn_destination(A, B).
+				origin(A, B) if instance(A, escape_51_1_1_1),
+								vn_initial_location(A, B).
+				agent(A, B) if instance(A, escape_51_1_1_1),
+								vn_theme(A, B).
+                path(A, B) if instance(A, escape_51_1_1_1),
+								vn_trajectory(A, B).
+
+	module escape_51_1_1_2
+		depends on escape_51_1_1
+		% VerbNet class escape_51_1_1_2 has 2 member verbs: (approach, enter)
+
+		sort declarations
+			escape_51_1_1_2 :: escape_51_1_1
+
+		axioms
+			state constraints
+				destination(A, B) if instance(A, escape_51_1_1_2),
+								vn_destination(A, B).
+				origin(A, B) if instance(A, escape_51_1_1_2),
+								vn_initial_location(A, B).
+				agent(A, B) if instance(A, escape_51_1_1_2),
+								vn_theme(A, B).
+                path(A, B) if instance(A, escape_51_1_1_2),
+								vn_trajectory(A, B).
+
+	module escape_51_1_1_3
+		depends on escape_51_1_1
+		% VerbNet class escape_51_1_1_3 has 5 member verbs: (ascend, climb, cross, descend, pass)
+
+		sort declarations
+			escape_51_1_1_3 :: escape_51_1_1
+
+		axioms
+			state constraints
+				destination(A, B) if instance(A, escape_51_1_1_3),
+								vn_destination(A, B).
+				origin(A, B) if instance(A, escape_51_1_1_3),
+								vn_initial_location(A, B).
+				agent(A, B) if instance(A, escape_51_1_1_3),
+								vn_theme(A, B).
+                path(A, B) if instance(A, escape_51_1_1_3),
+								vn_trajectory(A, B).

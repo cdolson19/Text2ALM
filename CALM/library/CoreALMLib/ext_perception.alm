@@ -1,0 +1,27 @@
+theory ext_perception
+
+    import perception.perception from CoreALMLib
+
+    module ext_perception
+        depends on perception
+
+        sort declarations
+            intangible_entity :: entity
+            conceptual_entity :: intangible_entity
+
+        function declarations
+            statics
+                basic
+                    information_content : conceptual_entity * thing -> booleans
+
+        axioms
+            state constraints
+                known_to(X, Y) if is_known(X).
+                -known_to(X, Y) if -is_known(X).
+
+            executability conditions
+                impossible occurs(X) if instance(X, recognize),
+                                        agent(X, A),
+                                        object(X, O),
+                                        information_content(I, O),
+                                        -known_to(I, A).

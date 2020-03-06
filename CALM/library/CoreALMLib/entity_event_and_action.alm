@@ -1,0 +1,134 @@
+theory entity_event_and_action
+
+    module entity_event_and_action
+
+        sort declarations
+            thing :: universe
+            entity :: thing
+            spatial_entity :: entity
+
+            place :: spatial_entity
+            tangible_entity :: spatial_entity
+
+            physical_object :: tangible_entity
+
+            inanimate_object :: physical_object
+            living_entity :: physical_object
+
+            event :: thing
+                attributes
+                    agent : entity -> booleans
+                    away_from : spatial_entity -> booleans
+                    base : thing -> booleans
+                    beneficiary : living_entity -> booleans
+                    destination : spatial_entity -> booleans
+                    donor : entity -> booleans
+                    experiencer : entity -> booleans
+                    instrument : entity -> booleans
+                    object : entity -> booleans
+                    origin : spatial_entity -> booleans
+                    path : spatial_entity -> booleans
+                    raw_material : tangible_entity -> booleans
+                    recipient : entity -> booleans
+                    result : entity -> booleans
+                    site : spatial_entity -> booleans
+                    toward : spatial_entity -> booleans
+
+            activity :: event
+
+            actions :: event
+% I ADDED THESE ATTRIBUTES
+                attributes
+                    vn_actor : entity -> booleans
+                    vn_agent : entity -> booleans
+                    vn_asset : thing -> booleans
+                    vn_attribute : thing -> booleans
+                    vn_beneficiary : living_entity -> booleans
+                    vn_cause : thing -> booleans
+                    vn_causer : thing -> booleans
+                    vn_coagent : entity -> booleans
+                    vn_copatient : entity -> booleans
+                    vn_cotheme : entity -> booleans
+                    vn_destination : spatial_entity -> booleans
+                    vn_experiencer : entity -> booleans
+                    vn_extent : entity -> booleans
+                    vn_goal : entity -> booleans
+                    vn_initial_location : spatial_entity -> booleans
+                    vn_initial_state : entity -> booleans
+                    vn_instrument : entity -> booleans
+                    vn_location : spatial_entity -> booleans
+                    vn_material : entity -> booleans
+                    vn_patient : entity -> booleans
+                    vn_pivot : thing -> booleans
+                    vn_predicate : thing -> booleans
+                    vn_product : entity -> booleans
+                    vn_recipient : entity -> booleans
+                    vn_reflexive : thing -> booleans
+                    vn_result : thing -> booleans
+                    vn_source : spatial_entity -> booleans
+                    vn_stimulus : thing -> booleans
+                    vn_theme : entity -> booleans
+                    vn_time : thing -> booleans
+                    vn_topic : thing -> booleans
+                    vn_trajectory : thing -> booleans
+                    vn_value : thing -> booleans
+
+        function declarations
+            statics
+                defined
+                    defined_agent : event -> booleans
+                    defined_object : event -> booleans
+                    defined_base : event -> booleans
+                    defined_experiencer : event -> booleans
+                    defined_instrument : event -> booleans
+                    defined_donor : event -> booleans
+                    defined_recipient : event -> booleans
+                    defined_beneficiary : event -> booleans
+                    defined_raw_material : event -> booleans
+                    defined_result : event -> booleans
+
+% I ADDED THESE FOUR %
+                   defined_origin : event -> booleans
+                   defined_destination : event -> booleans
+                   defined_away_from : event -> booleans
+                   defined_site : event -> booleans
+% I ADDED THE ABOVE FOUR %
+
+                    defined_toward : event -> booleans
+                    defined_path : event -> booleans
+
+        axioms
+            function definitions
+                defined_agent(X) if agent(X, Y).
+    
+                defined_object(X) if object(X, Y).
+
+                defined_base(X) if base(X, Y).
+
+                defined_experiencer(X) if experiencer(X, Y).
+
+                defined_instrument(X) if instrument(X, Y).
+
+                defined_donor(X) if donor(X, Y).
+
+                defined_recipient(X) if recipient(X, Y).
+
+                defined_beneficiary(X) if beneficiary(X, Y).
+
+                defined_raw_material(X) if raw_material(X, Y).
+
+                defined_result(X) if result(X, Y).
+
+% I ADDED THESE FOUR %
+                defined_origin(X) if origin(X, Y).
+
+                defined_destination(X) if destination(X, Y).
+
+                defined_away_from(X) if away_from(X, Y).
+
+                defined_site(X) if site(X, Y).
+% I ADDED THE ABOVE FOUR %
+
+                defined_path(X) if path(X, Y).
+
+                defined_toward(X) if toward(X, Y).

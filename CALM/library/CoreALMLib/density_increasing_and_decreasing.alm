@@ -1,0 +1,37 @@
+theory density_increasing_and_decreasing
+
+    import increasing_and_decreasing.increasing_and_decreasing from CoreALMLib
+
+    module density_increasing_and_decreasing
+        depends on increasing_and_decreasing
+
+        sort declarations
+            condense :: increase
+
+        axioms
+            state constraints
+                affected_property(X) = density if instance(X, condense).
+
+                false if instance(X, condense),
+                                from_value(X, FV),
+                                -instance(FV, density_value).
+
+                false if instance(X, condense),
+                                -defined_base(X).
+
+                false if instance(X, condense),
+                                base(X, B),
+                                -instance(B, tangible_entity).
+
+            executability conditions
+                impossible occurs(X) if instance(X, condense),
+                                        from_value(X, FV),
+                                        base(X, B),
+                                        -density(B, FV).
+
+
+
+
+ 
+
+    

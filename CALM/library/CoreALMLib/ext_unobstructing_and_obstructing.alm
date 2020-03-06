@@ -1,0 +1,13 @@
+theory ext_unobstructing_and_obstructing
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module ext_unobstructing_and_obstructing
+        depends on unobstructing_and_obstructing
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, obstruct),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -is_at(A, O).

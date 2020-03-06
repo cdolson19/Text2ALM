@@ -1,0 +1,28 @@
+theory specific_impairment
+
+    import impairment.impairment from CoreALMLib
+
+    module specific_impairment
+        depends on impairment
+
+        sort declarations
+            damage :: impair
+            break :: damage
+            harm :: impair
+
+        axioms
+            state constraints
+                is_damaged(X) if is_broken(X).
+
+                -is_broken(X) if -is_damaged(X).
+
+                false if instance(X, harm),
+                            object(X, O),
+                            -instance(O, living_entity).
+
+            dynamic causal laws
+                occurs(X) causes is_damaged(O) if instance(X, damage),
+                                                object(X, O).
+
+                occurs(X) causes is_broken(O) if instance(X, break),
+                                                object(X, O).

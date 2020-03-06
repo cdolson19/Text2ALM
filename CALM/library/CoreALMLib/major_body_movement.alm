@@ -1,0 +1,46 @@
+theory major_body_movement
+
+    import changing_position.changing_position from CoreALMLib
+
+    module major_body_movement
+        depends on changing_position
+
+        sort declarations
+                sit_down :: orient
+                stand_up :: orient
+
+        axioms
+            state constraints
+                false if instance(X, sit_down),
+                            -defined_agent(X).
+
+                object(X, Y) if instance(X, sit_down),
+                            agent(X, Y).
+
+                false if instance(X, stand_up),
+                            -defined_agent(X).
+
+                object(X, Y) if instance(X, stand_up),
+                            agent(X, Y).
+
+            dynamic causal laws
+                occurs(X) causes is_sitting(A) if instance(X, sit_down),
+                                                    agent(X, A).
+
+                occurs(X) causes -is_standing(A) if instance(X, sit_down),
+                                                    agent(X, A).
+
+                occurs(X) causes is_standing(A) if instance(X, stand_up),
+                                                    agent(X, A).
+
+                occurs(X) causes -is_sitting(A) if instance(X, stand_up),
+                                                    agent(X, A).
+
+            executability conditions
+                impossible occurs(X) if instance(X, sit_down),
+                                        agent(X, A),
+                                        is_sitting(A).
+
+                impossible occurs(X) if instance(X, stand_up),
+                                        agent(X, A),
+                                        is_standing(A).

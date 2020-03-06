@@ -1,0 +1,13 @@
+theory ext_admitting_and_shutting_out
+
+    import admitting_and_shutting_out.admitting_and_shutting_out from CoreALMLib
+
+    module ext_admitting_and_shutting_out
+        depends on admitting_and_shutting_out
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, shut_out),
+                                    object(X, O),
+                                    base(X, B),
+                                    contained_in(O, B).

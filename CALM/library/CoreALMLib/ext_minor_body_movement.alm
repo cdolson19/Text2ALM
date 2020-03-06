@@ -1,0 +1,21 @@
+theory ext_minor_body_movement
+
+    import minor_body_movement.minor_body_movement from CoreALMLib
+
+    module ext_minor_body_movement
+        depends on minor_body_movement
+
+        sort declarations
+            organism :: living_entity
+            animal :: organism
+ 
+        axioms
+            state constraints
+                false if instance(X, head_nod),
+                            agent(X, A),
+                            -instance(A, animal).
+
+                false if instance(X, head_shake),
+                            agent(X, A),
+                            -instance(A, animal).
+

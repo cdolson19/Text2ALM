@@ -1,0 +1,69 @@
+theory accessibility
+
+    import accessibility_fluents.accessibility_fluents from CALMFluents
+
+    module accessibility
+        depends on accessibility_fluents
+
+        sort declarations
+            make_accessible :: actions
+            make_inaccessible :: actions
+
+        function declarations
+            fluents
+                defined
+                    inaccessible_to : entity * thing -> booleans
+                    is_inaccessible : entity -> booleans
+
+        axioms
+            function definitions
+                inaccessible_to(X, Y) if -accessible_to(X, Y).
+                is_inaccessible(X) if -is_accessible(X).
+
+            state constraints
+                accessible_to(X, Y) if is_accessible(X).
+                -accessible_to(X, Y) if -is_accessible(X).
+
+                false if instance(X, make_accessible),
+                                    -defined_object(X).
+
+                false if instance(X, make_inaccessible),  % Commented out
+                                    -defined_object(X). % Commented out
+
+            dynamic causal laws
+                occurs(X) causes accessible_to(O, B) if instance(X, make_accessible),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes is_accessible(O) if instance(X, make_accessible),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes -accessible_to(O, B) if instance(X, make_inaccessible),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -is_accessible(O) if instance(X, make_inaccessible),
+                                                object(X, O),
+                                                -defined_base(X).
+
+            executability conditions
+                impossible occurs(X) if instance(X, make_accessible),
+                                            object(X, O),
+                                            base(X, B),
+                                            accessible(O, B).  % accessible_to(O, B).
+
+                impossible occurs(X) if instance(X, make_accessible),
+                                            object(X, O),
+                                            -defined_base(X),
+                                            is_accessible(O).
+
+                impossible occurs(X) if instance(X, make_inaccessible),
+                                            object(X, O),
+                                            base(X, B),
+                                            -accessible(O, B).  % -accessible_to(O, B).
+
+                impossible occurs(X) if instance(X, make_inaccessible),
+                                            object(X, O),
+                                            -defined_base(X),
+                                            -is_accessible(O).

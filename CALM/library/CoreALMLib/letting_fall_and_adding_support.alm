@@ -1,0 +1,72 @@
+theory letting_fall_and_adding_support
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module letting_fall_and_adding_support
+        depends on unobstructing_and_obstructing
+
+        sort declarations
+            let_fall :: unobstruct
+            add_support :: obstruct
+
+            dive :: let_fall
+
+        axioms
+            state constraints
+                is_supported(O) if supported_with(O, I).
+                -supported_with(O, I) if -is_supported(O).
+
+                is_obstructed(X) if is_supported(X).
+                -is_obstructed(X) if -is_supported(X).
+
+
+                false if instance(X, let_fall),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, let_fall),
+                            -defined_agent(X).
+
+                false if instance(X, let_fall),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+                false if instance(X, add_support),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+ 
+                false if instance(X, add_support),
+                            instrument(X, I),
+                            -instance(I, tangible_entity).
+
+                false if instance(X, dive),
+                            -defined_agent(X).
+
+                false if instance(X, dive),
+                            agent(X, A),
+                            -instance(A, animal).
+
+                object(X, A) if instance(X, dive),
+                            agent(X, A).
+
+            dynamic causal laws
+                occurs(X) causes -is_supported(O) if instance(X, let_fall),
+                                                object(X, O).
+
+                occurs(X) causes is_supported(O) if instance(X, add_support),
+                                                object(X, O),
+                                                -defined_instrument(X).
+
+                occurs(X) causes supported_with(O, I) if instance(X, add_support),
+                                                object(X, O),
+                                                instrument(X, I).
+
+            executability conditions
+                impossible occurs(X) if instance(X, let_fall),
+                                                object(X, O),
+                                                -is_supported(O).
+
+                impossible occurs(X) if instance(X, add_support),
+                                                object(X, O),
+                                                instrument(X, I),
+                                                supported_with(O, I).

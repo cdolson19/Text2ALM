@@ -1,0 +1,21 @@
+theory ext_specific_motion
+
+    import specific_motion.specific_motion from CoreALMLib
+
+    module ext_specific_motion
+        depends on specific_motion
+
+        axioms
+            state constraints
+                is_touching(X, Y) if is_touching(Y, X).
+                -is_touching(X, Y) if -is_touching(Y, X).
+
+            executability conditions
+                impossible occurs(X) if instance(X, slide),
+                                        object(X, O),
+                                        path(X, P),
+                                        -is_touching(O, P).
+
+                impossible occurs(X) if instance(X, fall),
+                                        object(X, O),
+                                        is_supported(O).

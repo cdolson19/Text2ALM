@@ -1,0 +1,41 @@
+theory motion_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.abuts_fluents from CALMFluents
+    import fluents.accessible_fluents from CALMFluents
+    import fluents.blocked_fluents from CALMFluents
+    import fluents.closed_fluents from CALMFluents
+    import fluents.confined_fluents from CALMFluents
+    import fluents.contained_fluents from CALMFluents
+    import fluents.content_fluents from CALMFluents
+    import fluents.encloses_fluents from CALMFluents
+    import fluents.held_by_fluents from CALMFluents
+    import fluents.is_inside_fluents from CALMFluents
+    import fluents.location_fluents from CALMFluents
+    import fluents.possession_fluents from CALMFluents
+    import fluents.restrained_fluents from CALMFluents
+    import fluents.shut_out_fluents from CALMFluents
+
+    module motion_fluents
+        depends on entity_event_and_action, abuts_fluents,
+                accessible_fluents, blocked_fluents,
+                closed_fluents, confined_fluents,
+                contained_fluents, content_fluents,
+                encloses_fluents, held_by_fluents, is_inside_fluents,
+                location_fluents, possession_fluents,
+                restrained_fluents, shut_out_fluents
+        function declarations
+            fluents
+                basic
+                    is_above : spatial_entity * spatial_entity -> booleans
+                    is_along : spatial_entity * spatial_entity -> booleans
+                    is_behind : spatial_entity * spatial_entity -> booleans
+                    is_below : spatial_entity * spatial_entity -> booleans
+                    is_beside : spatial_entity * spatial_entity -> booleans
+                    is_between : spatial_entity * spatial_entity -> booleans
+                    is_contained : tangible_entity -> booleans
+                    is_in_front_of : spatial_entity * spatial_entity -> booleans
+                    is_near : spatial_entity * spatial_entity -> booleans
+                    is_on : spatial_entity * spatial_entity -> booleans
+                    is_opposite : spatial_entity * spatial_entity -> booleans
+                    is_over : spatial_entity * spatial_entity -> booleans
+                    is_under : spatial_entity * spatial_entity -> booleans

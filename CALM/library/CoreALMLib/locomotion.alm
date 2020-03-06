@@ -1,0 +1,44 @@
+theory locomotion
+
+    import motion.motion from CoreALMLib
+
+    module locomotion
+        depends on motion
+
+        sort declarations
+            locomotion :: move
+
+            carry :: locomotion
+            go_to :: locomotion
+            leave :: locomotion
+            walk :: locomotion
+
+        axioms
+            state constraints
+                false if instance(X, locomotion),
+                                -defined_agent(X).
+
+                false if instance(X, carry),
+                                -defined_agent(X).
+
+                false if instance(X, carry),
+                                agent(X, A),
+                                -instance(A, tangible_entity).
+
+                false if instance(X, go_to),
+                                -defined_destination(X).
+
+                false if instance(X, leave),
+                                -defined_origin(X).
+
+                object(X, Y) if instance(X, locomotion),
+                                agent(X, Y).
+
+                agent(X, Y) if instance(X, locomotion),
+                                object(X, Y).
+
+            executability conditions
+                impossible occurs(X) if instance(X, carry),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -held_by(O, A).

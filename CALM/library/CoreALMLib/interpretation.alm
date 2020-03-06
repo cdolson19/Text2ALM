@@ -1,0 +1,49 @@
+theory interpretation
+
+    import interpretation_fluents.interpretation_fluents from CALMFluents
+
+    module interpretation
+        depends on interpretation_fluents
+
+        sort declarations
+            interpret :: actions
+            learn :: interpret
+
+            intangible_entity :: entity
+            conceptual_entity :: intangible_entity
+            message :: conceptual_entity
+            information :: conceptual_entity
+
+        axioms
+            state constraints
+                known_to(X, Y) if is_known(X).
+                -known_to(X, Y) if -is_known(X).
+
+                false if instance(X, interpret),
+                            -defined_agent(X).
+
+                false if instance(X, interpret),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+                false if instance(X, interpret),
+                            -defined_object(X).
+
+                false if instance(X, interpret),
+                            object(X, O),
+                            -instance(O, message).
+
+                result(X) = R if instance(X, interpret),
+                            object(X, O),
+                            result(X1, O),
+                            object(X1, R),
+                            instance(R, information).
+
+            dynamic causal laws
+                occurs(X) causes known_to(O, A) if instance(X, interpret),
+                                       object(X, O),
+                                       agent(X, A).
+
+    
+
+

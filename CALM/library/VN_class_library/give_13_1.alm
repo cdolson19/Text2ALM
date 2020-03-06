@@ -1,0 +1,36 @@
+theory give_13_1
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module give_13_1
+		depends on specific_loss_of_possession
+		% VerbNet class give_13_1 has 8 member verbs: (deal, give-back, lend, loan, pass, peddle, refund, render)
+		sort declarations
+			give_13_1 :: relinquish
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, give_13_1),
+				                vn_agent(A, B).
+				recipient(A, B) if instance(A, give_13_1),
+				                vn_recipient(A, B).
+				object(A, B) if instance(A, give_13_1),
+				                vn_theme(A, B).
+
+	module give_13_1_1
+		depends on give_13_1
+		% VerbNet class give_13_1_1 has 8 member verbs: (give, hawk, hock, lease, let, pawn, rent, sell)
+
+		sort declarations
+			give_13_1_1 :: give_13_1
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, give_13_1_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, give_13_1_1),
+				                vn_theme(A, B).
+				recipient(A, B) if instance(A, give_13_1_1),
+				                vn_recipient(A, B).
+				object(A, B) if instance(A, give_13_1_1),
+				                vn_asset(A, B).

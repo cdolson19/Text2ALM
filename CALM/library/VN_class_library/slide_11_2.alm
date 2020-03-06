@@ -1,0 +1,43 @@
+theory slide_11_2
+
+    import locomotion.locomotion from CoreALMLib
+
+    module slide_11_2
+        depends on locomotion
+		% VerbNet class slide_11_2 has 3 member verbs: (move, pull, scoot)
+
+        sort declarations
+            slide_11_2 :: go_to
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, slide_11_2),
+                                vn_agent(X, Y).
+                agent(X, Y) if instance(X, slide_11_2),
+                                vn_theme(X, Y).
+                destination(X, Y) if instance(X, slide_11_2),
+                                vn_destination(X, Y).
+                origin(X, Y) if instance(X, slide_11_2),
+                                vn_initial_location(X, Y).
+                path(X, Y) if instance(X, slide_11_2),
+                                vn_trajectory(X, Y).
+
+    module slide_11_2_1
+        depends on slide_11_2
+		% VerbNet class slide_11_2_1 has 5 member verbs: (bounce, dart, float, roll, slide)
+
+        sort declarations
+            slide_11_2_1 :: slide_11_2
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, slide_11_2_1),
+                                vn_agent(X, Y).
+                agent(X, Y) if instance(X, slide_11_2_1),
+                                vn_theme(X, Y).
+                destination(X, Y) if instance(X, slide_11_2_1),
+                                vn_destination(X, Y).
+                origin(X, Y) if instance(X, slide_11_2_1),
+                                vn_initial_location(X, Y).
+                path(X, Y) if instance(X, slide_11_2_1),
+                                vn_trajectory(X, Y).

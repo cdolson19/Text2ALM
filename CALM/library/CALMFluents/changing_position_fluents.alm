@@ -1,0 +1,10 @@
+theory changing_position_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+
+    module changing_position_fluents
+        depends on entity_event_and_action
+        function declarations
+            fluents
+                basic
+                    is_sitting : entity -> booleans
+                    is_standing : entity -> booleans

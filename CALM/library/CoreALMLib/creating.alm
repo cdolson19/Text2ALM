@@ -1,0 +1,292 @@
+theory creating
+
+    import creating_fluents.creating_fluents from CALMFluents
+
+    module creating
+        depends on creating_fluents
+  
+        sort declarations
+            create :: actions
+
+            copy :: create
+            duplicate :: copy
+
+            produce :: create
+            record :: create
+
+            property_group :: thing
+            property_value :: property_group
+
+            substance :: tangible_entity
+
+            intangible_entity :: entity
+            conceptual_entity :: intangible_entity
+            message :: conceptual_entity
+            recording :: message
+     
+        axioms
+            state contraints
+                false if instance(X, create),
+                            -defined_result(X).
+
+                false if instanc(X, create),
+                            instrument(X, I),
+                            -instance(I, tangible_entity).
+
+                false if instance(X, copy),
+                            -defined_object(X).
+
+                false if instance(X, copy),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, copy),
+                            object(X, O),
+                            result(X, R),
+                            instance(O, S),
+                            -instance(R, S).
+
+                false if instance(X, produce),
+                            -defined_raw_material(X).
+
+                false if instance(X, record),
+                            result(X, R),
+                            -instance(R, recording).
+
+            dynamic causal laws
+                occurs(X) causes exists(R) if instance(X, create),
+                                            result(X, R).
+
+                occurs(X) causes content(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            content(O, Y).
+
+                occurs(X) causes has_part(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            has_part(O, Y).
+
+                occurs(X) causes material(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            material(O, Y).
+
+                occurs(X) causes age(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            age(O, Y).
+
+                occurs(X) causes animacy(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            animacy(O, Y).
+
+                occurs(X) causes area(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            area(O, Y).
+
+                occurs(X) causes breakability(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            breakability(O, Y).
+
+                occurs(X) causes capacity(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            capacity(O, Y).
+
+                occurs(X) causes color(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            color(O, Y).
+
+                occurs(X) causes consistency(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            consistency(O, Y).
+
+                occurs(X) causes density(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            density(O, Y).
+
+                occurs(X) causes depth(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            depth(O, Y).
+
+                occurs(X) causes height(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            height(O, Y).
+
+                occurs(X) causes length(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            length(O, Y).
+
+                occurs(X) causes mass(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            mass(O, Y).
+
+                occurs(X) causes sentience(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            sentience(O, Y).
+
+                occurs(X) causes sex(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            sex(O, Y).
+
+                occurs(X) causes shape(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            shape(O, Y).
+
+                occurs(X) causes size(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            size(O, Y).
+
+                occurs(X) causes smell(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            smell(O, Y).
+
+                occurs(X) causes taste(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            taste(O, Y).
+
+                occurs(X) causes temperature(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            temperature(O, Y).
+
+                occurs(X) causes texture(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            texture(O, Y).
+
+                occurs(X) causes thickness(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            thickness(O, Y).
+
+                occurs(X) causes trait(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            trait(O, Y).
+
+                occurs(X) causes wetness(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            wetness(O, Y).
+
+                occurs(X) causes width(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            width(O, Y).
+
+                occurs(X) causes volume(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            volume(O, Y).
+
+                occurs(X) causes content(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            content(O, Y).
+
+                occurs(X) causes has_part(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            has_part(O, Y).
+
+                occurs(X) causes material(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            material(O, Y).
+
+                occurs(X) causes age(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            age(O, Y).
+
+                occurs(X) causes animacy(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            animacy(O, Y).
+
+                occurs(X) causes -area(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -area(O, Y).
+
+                occurs(X) causes -breakability(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -breakability(O, Y).
+
+                occurs(X) causes -capacity(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -capacity(O, Y).
+
+                occurs(X) causes -color(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -color(O, Y).
+
+                occurs(X) causes -consistency(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -consistency(O, Y).
+
+                occurs(X) causes -density(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -density(O, Y).
+
+                occurs(X) causes -depth(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -depth(O, Y).
+
+                occurs(X) causes -height(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -height(O, Y).
+
+                occurs(X) causes -length(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -length(O, Y).
+
+                occurs(X) causes -mass(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -mass(O, Y).
+
+                occurs(X) causes -sentience(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -sentience(O, Y).
+
+                occurs(X) causes -sex(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -sex(O, Y).
+
+                occurs(X) causes -shape(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -shape(O, Y).
+
+                occurs(X) causes -size(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -size(O, Y).
+
+                occurs(X) causes -smell(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -smell(O, Y).
+
+                occurs(X) causes -taste(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -taste(O, Y).
+
+                occurs(X) causes -temperature(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -temperature(O, Y).
+
+                occurs(X) causes -texture(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -texture(O, Y).
+
+                occurs(X) causes -thickness(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -thickness(O, Y).
+
+                occurs(X) causes -trait(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -trait(O, Y).
+
+                occurs(X) causes -wetness(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -wetness(O, Y).
+
+                occurs(X) causes -width(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -width(O, Y).
+
+                occurs(X) causes -volume(R, Y) if instance(X, duplicate),
+                                            object(X, O),
+                                            -volume(O, Y).
+
+                occurs(X) causes material(R, RM) if instance(X, produce),
+                                            raw_material(X, RM),
+                                            instance(RM, substance),
+                                            result(X, R).
+
+                occurs(X) causes has_part(R, RM) if instance(X, produce),
+                                            raw_material(X, RM),
+                                            -instance(RM, substance),
+                                            result(X, R).

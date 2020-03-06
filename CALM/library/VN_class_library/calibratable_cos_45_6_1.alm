@@ -1,0 +1,42 @@
+theory calibratable_cos_45_6_1
+
+    import locomotion.locomotion from CoreALMLib
+
+	module calibratable_cos_45_6_1
+		depends on locomotion
+		% VerbNet class calibratable_cos_45_6_1 has 2 member verbs: (build, die)
+
+		sort declarations
+			calibratable_cos_45_6_1 :: walk
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1),
+                                vn_attribute(X,Y).
+
+                actor(X, Y) if instance(X, calibratable_cos_45_6_1),
+                                vn_patient(X,Y).
+
+	module calibratable_cos_45_6_1_1
+		depends on calibratable_cos_45_6_1
+		% VerbNet class calibratable_cos_45_6_1_1 has 35 member verbs: (appreciate, climb, decline, depreciate, dip, dive, drop, dwindle, explode, fall, fall-off, fall_away, fluctuate, gain, go_down, go_up, grow, jump, multiply, mushroom, plummet, plump, plunge, retreat, rise, rocket, seesaw, skyrocket, slide, slip, soar, surge, swell, swing, tumble)
+
+		sort declarations
+			calibratable_cos_45_6_1_1 :: calibratable_cos_45_6_1
+
+		axioms
+			state constraints
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1_1),
+                                vn_attribute(X,Y).
+
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1_1),
+                                vn_extent(X,Y).
+
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1_1),
+                                vn_initial_state(X,Y).
+
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1_1),
+                                vn_result(X,Y).
+
+                agent(X, Y) if instance(X, calibratable_cos_45_6_1_1),
+                                vn_patient(X,Y).

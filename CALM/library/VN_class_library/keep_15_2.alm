@@ -1,0 +1,19 @@
+theory keep_15_2
+
+	import letting_go_and_taking_hold.letting_go_and_taking_hold from CoreALMLib
+
+	module keep_15_2
+		depends on letting_go_and_taking_hold
+		% VerbNet class keep_15_2 has 7 member verbs: (stock, hoard, hold, leave, store, keep, stockpile)
+
+		sort declarations
+			keep_15_2 :: take_hold
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, keep_15_2),
+				                vn_agent(A, B).
+				origin(A, B) if instance(A, keep_15_2),
+				                vn_location(A, B).
+				object(A, B) if instance(A, keep_15_2),
+				                vn_theme(A, B).

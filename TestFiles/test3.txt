@@ -1,0 +1,4 @@
+John picked up the apple.
+John went to the office.
+John went to the kitchen.
+John dropped the apple.

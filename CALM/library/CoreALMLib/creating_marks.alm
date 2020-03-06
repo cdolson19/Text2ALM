@@ -1,0 +1,34 @@
+theory creating_marks
+
+    import embodying.embodying from CoreALMLib
+
+    module creating_marks
+        depends on embodying
+
+        sort declarations
+            mark :: embody, produce
+            print :: mark
+
+            physical_object :: tangible_entity
+            inanimate_object :: physical_object
+            piece_of_substance :: inanimate_object
+            physical_mark :: piece_of_substance
+
+            artifact :: inanimate_object
+            physical_document :: artifact
+
+            document :: message
+
+        axioms
+            state constraints
+                false if instance(X, mark),
+                            result(X, R),
+                            -instance(X, physical_mark).
+
+                false if instance(X, print),
+                            object(X, O),
+                            -instance(X, document).
+
+                false if instance(X, print),
+                            result(X, R),
+                            -instance(X, physical_document).

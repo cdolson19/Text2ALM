@@ -1,0 +1,51 @@
+theory free_80
+
+	import changing_possession.changing_possession from CoreALMLib
+
+	module free_80
+		depends on changing_possession
+		% VerbNet class free_80 has 10 member verbs: (alleviate, break, cleanse, discharge, disencumber, ease, exonerate, liberate, unburden, wean)
+
+		sort declarations
+			free_80 :: lose
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, free_80),
+				                vn_source(A, B).
+				object(A, B) if instance(A, free_80),
+				                vn_theme(A, B).
+				donor(A, B) if instance(A, free_80),
+				                vn_causer(A, B).
+
+    module free_80_1
+		depends on free_80
+		% VerbNet class free_80_1 has 17 member verbs: (absolve, acquit, clear, emancipate, free, release, rerelease)
+
+		sort declarations
+			free_80_1 :: free_80
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, free_80_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, free_80_1),
+				                vn_theme(A, B).
+				donor(A, B) if instance(A, free_80_1),
+				                vn_causer(A, B).
+
+    module free_80_1_1
+		depends on free_80_1
+		% VerbNet class free_80_1_1 has 4 member verbs: (cure, purge, purify, relieve)
+
+		sort declarations
+			free_80_1_1 :: free_80
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, free_80_1_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, free_80_1_1),
+				                vn_theme(A, B).
+				donor(A, B) if instance(A, free_80_1_1),
+				                vn_causer(A, B).

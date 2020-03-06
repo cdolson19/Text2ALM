@@ -1,0 +1,32 @@
+theory accessibility_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.abuts_fluents from CALMFluents
+    import fluents.accessible_fluents from CALMFluents
+    import fluents.blocked_fluents from CALMFluents
+    import fluents.closed_fluents from CALMFluents
+    import fluents.confined_fluents from CALMFluents
+    import fluents.contained_fluents from CALMFluents
+    import fluents.held_by_fluents from CALMFluents
+    import fluents.is_inside_fluents from CALMFluents
+    import fluents.location_fluents from CALMFluents
+    import fluents.restrained_fluents from CALMFluents
+    import fluents.shut_out_fluents from CALMFluents
+    import fluents.touching_fluents from CALMFluents
+
+    module accessibility_fluents
+        depends on entity_event_and_action, abuts_fluents, accessible_fluents,
+                blocked_fluents, closed_fluents, confined_fluents,
+                contained_fluents, held_by_fluents, is_inside_fluents,
+                location_fluents, restrained_fluents, shut_out_fluents,
+                touching_fluents
+        function declarations
+            fluents
+                basic
+                    closed_with : spatial_entity * tangible_entity -> booleans
+                    concealed_from : tangible_entity * thing -> booleans
+                    is_activated : entity -> booleans
+                    is_concealed : tangible_entity -> booleans
+                    is_obstructed : spatial_entity -> booleans
+                    is_supported : tangible_entity -> booleans
+                    restrained_by : tangible_entity * entity -> booleans
+                    supported_with : tangible_entity * tangible_entity -> booleans

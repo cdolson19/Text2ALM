@@ -1,0 +1,36 @@
+theory obtain_13_5_2
+
+	import specific_gain_of_possession.specific_gain_of_possession from CoreALMLib
+
+	module obtain_13_5_2
+		depends on specific_gain_of_possession
+		% VerbNet class obtain_13_5_2 has 24 member verbs: (accept, accrue, accumulate, appropriate, arrogate, borrow, cadge, collect, commander, exact, grab, hijack, inherit, make, receive, recoup, recover, regain, retrieve, seize, select, snatch, source, subselect)
+		sort declarations
+			obtain_13_5_2 :: obtain
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, obtain_13_5_2),
+				                vn_agent(A, B).
+				origin(A, B) if instance(A, obtain_13_5_2),
+				                vn_source(A, B).
+				object(A, B) if instance(A, obtain_13_5_2),
+				                vn_theme(A, B).
+
+	module obtain_13_5_2_1
+		depends on obtain_13_5_2
+		% VerbNet class obtain_13_5_2_1 has 3 member verbs: (acquire, purchase, obtain)
+
+		sort declarations
+			obtain_13_5_2_1 :: obtain_13_5_2
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, obtain_13_5_2_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, obtain_13_5_2_1),
+				                vn_asset(A, B).
+				origin(A, B) if instance(A, obtain_13_5_2_1),
+				                vn_source(A, B).
+				object(A, B) if instance(A, obtain_13_5_2_1),
+				                vn_theme(A, B).

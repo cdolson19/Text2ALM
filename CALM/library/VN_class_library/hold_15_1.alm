@@ -1,0 +1,17 @@
+theory hold_15_1
+
+    import letting_go_and_taking_hold.letting_go_and_taking_hold from CoreALMLib
+
+    module hold_15_1
+        depends on letting_go_and_taking_hold
+        % VerbNet class hold_15_1 has 9 member verbs: (clasp, clutch, grab, grasp, grip, handle, hold, seize, wield)
+
+        sort declarations
+            hold_15_1 :: take_hold
+
+        axioms
+            state constraints
+				agent(A, B) if instance(A, hold_15_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, hold_15_1),
+				                vn_theme(A, B).

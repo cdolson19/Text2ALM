@@ -1,0 +1,83 @@
+theory contribute_13_2
+
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module contribute_13_2
+		depends on specific_loss_of_possession
+		% VerbNet class contribute_13_2 has 17 member verbs: (abnegate, betroth, forgo, gift, give-away, give-out, give-up, hand-out, pass-out, refer, relinquish, remit, resign, restore, shell-out, turn-in, turn-over)
+
+		sort declarations
+			contribute_13_2 :: relinquish
+
+		axioms
+			state constraints
+                agent(A, B) if instance(A, contribute_13_2),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, contribute_13_2),
+				                vn_theme(A, B).
+                recipient(A, B) if instance(A, contribute_13_2),
+				                vn_recipient(A, B).
+
+    module contribute_13_2_1
+		depends on contribute_13_2
+		% VerbNet class future_having_13_3_1 has 2 member verbs: (disseminate, distribute)
+
+		sort declarations
+			contribute_13_2_1 :: contribute_13_2
+
+		axioms
+			state constraints
+                agent(A, B) if instance(A, contribute_13_2_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, contribute_13_2_1),
+				                vn_theme(A, B).
+                recipient(A, B) if instance(A, contribute_13_2_1),
+				                vn_recipient(A, B).
+
+    module contribute_13_2_1_1
+		depends on contribute_13_2_1
+		% VerbNet class future_having_13_3_1_1 has 9 member verbs: (administer, circularize, contribute, donate, forfeit, resubmit, sacrifice, submit, surrender)
+
+		sort declarations
+			contribute_13_2_1_1 :: contribute_13_2_1
+
+		axioms
+			state constraints
+                agent(A, B) if instance(A, contribute_13_2_1_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, contribute_13_2_1_1),
+				                vn_theme(A, B).
+                recipient(A, B) if instance(A, contribute_13_2_1_1),
+				                vn_recipient(A, B).
+
+    module contribute_13_2_2
+		depends on contribute_13_2
+		% VerbNet class future_having_13_3_2 has 4 member verbs: (disburse, extend, proffer, transfer)
+
+		sort declarations
+			contribute_13_2_2 :: contribute_13_2
+
+		axioms
+			state constraints
+                agent(A, B) if instance(A, contribute_13_2_2),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, contribute_13_2_2),
+				                vn_theme(A, B).
+                recipient(A, B) if instance(A, contribute_13_2_2),
+				                vn_recipient(A, B).
+
+    module contribute_13_2_2_1
+		depends on contribute_13_2_2
+		% VerbNet class future_having_13_3_2 has 1 member verbs: (reimburse)
+
+		sort declarations
+			contribute_13_2_2_1 :: contribute_13_2_2
+
+		axioms
+			state constraints
+                agent(A, B) if instance(A, contribute_13_2_2_1),
+				                vn_agent(A, B).
+				object(A, B) if instance(A, contribute_13_2_2_1),
+				                vn_theme(A, B).
+                recipient(A, B) if instance(A, contribute_13_2_2_1),
+				                vn_recipient(A, B).

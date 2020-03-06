@@ -1,0 +1,27 @@
+theory ext_letting_fall_and_adding_support
+
+    import letting_fall_and_adding_support.letting_fall_and_adding_support from CoreALMLib
+
+    module ext_letting_fall_and_adding_support
+        depends on letting_fall_and_adding_support
+
+        axioms
+            state constraints
+                is_touching(X, Y) if is_touching(Y, X).
+                -is_touching(X, Y) if -is_touching(Y, X).
+
+            executability conditions
+                impossible occurs(X) if instance(X, let_fall),
+                                    object(X, O),
+                                    agent(X, A),
+                                    -is_at(A, O).
+
+                impossible occurs(X) if instance(X, add_support),
+                                    object(X, O),
+                                    agent(X, A),
+                                    -is_at(A, O).
+
+                impossible occurs(X) if instance(X, add_support),
+                                    object(X, O),
+                                    instrument(X, I),
+                                    -is_touching(O, I).

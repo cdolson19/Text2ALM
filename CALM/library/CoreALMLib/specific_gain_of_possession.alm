@@ -1,0 +1,25 @@
+theory specific_gain_of_possession
+
+    import changing_possession.changing_possession from CoreALMLib
+
+    module specific_gain_of_possession
+        depends on changing_possession
+
+        sort declarations
+            obtain :: receive
+            take :: obtain
+
+        axioms
+            state constraints
+                agent(X, Y) if instance(X, receive),
+                                recipient(X, Y).
+
+                recipient(X, Y) if instance(X, receive),
+                                agent(X, Y).
+
+                false if instance(X, take),
+                                -defined_donor(X).
+
+                false if instance(X, take),
+                                donor(X, D),
+                                -instance(D, tangible_entity).

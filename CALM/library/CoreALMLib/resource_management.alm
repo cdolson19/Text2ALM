@@ -1,0 +1,60 @@
+theory resource_management
+
+    import resource_management_fluents.resource_management_fluents from CALMFluents
+
+    module resource_management
+        depends on resource_management_fluents
+
+        sort declarations
+            consume :: actions
+            replenish :: actions
+            allocate_resource :: actions
+            release_resource :: actions
+
+        axioms
+            state constraints
+                available_to(X, Y) if is_available(X).
+                -available_to(X, Y) if -is_available(X).
+
+                false if instance(X, consume),
+                        -defined_object(X).
+
+                false if instance(X, consume),
+                        -defined_base(X).
+
+                false if instance(X, replenish),
+                        -defined_object(X).
+
+                false if instance(X, replenish),
+                        -defined_base(X).
+
+                false if instance(X, allocate_resource),
+                        -defined_object(X).
+
+                false if instance(X, release_resource),
+                        -defined_object(X).
+
+            dynamic causal laws
+                occurs(X) causes -is_available(O) if instance(X, allocate_resource),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes -available_to(O, B) if instance(X, allocate_resource),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes is_available(O) if instance(X, release_resource),
+                                                object(X, O),
+                                                -defined_base(X).
+
+                occurs(X) causes available_to(O, B) if instance(X, release_resource),
+                                                object(X, O),
+                                                base(X, B).
+            executability conditions
+                impossible occurs(X) if instance(X, allocate_resource),
+                                                object(X, O),
+                                                -is_available(O).
+
+                impossible occurs(X) if instance(X, release_resource),
+                                                object(X, O),
+                                                is_available(O).

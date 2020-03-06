@@ -1,0 +1,7 @@
+theory increasing_and_decreasing_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import property_fluents.characteristic_fluents from CALMFluents
+    import property_fluents.measurement_fluents from CALMFluents
+
+    module increasing_and_decreasing_fluents
+        depends on entity_event_and_action, characteristic_fluents, measurement_fluents

@@ -1,0 +1,90 @@
+theory letting_go_and_taking_hold
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module letting_go_and_taking_hold
+        depends on unobstructing_and_obstructing
+
+        sort declarations
+            let_go_of :: actions
+            take_hold :: actions
+ 
+        axioms
+            state constraints
+                is_held(X) if held_by(X, Y).
+                -held_by(X, Y) if -is_held(X).
+  
+                is_obstructed(X) if is_held(X).
+                -is_obstructed(X) if -is_held(X).
+
+                location(A, P) if held_by(A, B),
+                                  location(B, P).
+
+                abuts(X, Y) if held_by(X, Y).
+
+                false if instance(X, let_go_of),
+                            object(X, O),
+                            -instance(X, tangible_entity).
+
+                false if instance(X, let_go_of),
+                            -defined_agent(X).
+
+                false if instance(X, let_go_of),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+                false if instance(X, take_hold),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, take_hold),
+                            -defined_agent(X).
+
+                false if instance(X, take_hold),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -is_held(O) if instance(X, let_go_of),
+                                                object(X, O),
+                                                -defined_agent(X).
+
+                occurs(X) causes -held_by(O, A) if instance(X, let_go_of),
+                                                object(X, O),
+                                                agent(X, A).
+
+                occurs(X) causes is_held(O) if instance(X, take_hold),
+                                                object(X, O),
+                                                -defined_agent(X).
+
+                occurs(X) causes held_by(O, A) if instance(X, take_hold),
+                                                object(X, O),
+                                                agent(X, A).
+
+            executability conditions
+                impossible occurs(X) if instance(X, let_go_of),
+                                        object(X, O),
+                                        -defined_agent(X),
+                                        -is_held(O).
+
+                impossible occurs(X) if instance(X, let_go_of),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -held_by(O, A).
+
+                impossible occurs(X) if instance(X, take_hold),
+                                        object(X, O),
+                                        -defined_agent(X),
+                                        is_held(O).
+
+                impossible occurs(X) if instance(X, take_hold),
+                                        object(X, O),
+                                        agent(X, A),
+                                        held_by(O, A).
+
+                impossible occurs(X) if instance(X, take_hold),
+                                        object(X, O),
+                                        agent(X, A),
+                                        location(A, Q),
+                                        location(O, R),
+                                        Q != R.

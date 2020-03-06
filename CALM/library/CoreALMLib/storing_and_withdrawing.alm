@@ -1,0 +1,77 @@
+theory storing_and_withdrawing
+
+    import storing_and_withdrawing_fluents.storing_and_withdrawing_fluents from CALMFluents
+
+    module storing_and_withdrawing
+        depends on storing_and_withdrawing_fluents
+
+        sort declarations
+            store :: actions
+            withdraw :: actions
+
+        axioms
+            state constraints
+                is_stored(O) if stored_in(O, B).
+                -stored_in(O, B) if -is_stored(O).
+
+                false if instance(X, store),
+                        -defined_object(X).
+
+                false if instance(X, store),
+                        -defined_base(X).
+
+                false if instance(X, store),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+                false if instance(X, store),
+                        base(X, B1),
+                        base(X, B2),
+                        instance(B1, tangible_entity),
+                        instance(B2, tangible_entity),
+                        B1 != B2.
+
+                false if instance(X, withdraw),
+                        -defined_object(X).
+
+                false if instance(X, withdraw),
+                        -defined_base(X).
+
+                false if instance(X, withdraw),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+                false if instance(X, withdraw),
+                        base(X, B1),
+                        base(X, B2),
+                        instance(B1, tangible_entity),
+                        instance(B2, tangible_entity),
+                        B1 != B2.
+
+            dynamic causal laws
+                occurs(X) causes stored_in(O, B) if instance(X, store),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes content(B, O) if instance(X, store),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -stored_in(O, B) if instance(X, withdraw),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -content(B, O) if instance(X, withdraw),
+                                                object(X, O),
+                                                base(X, B).
+
+            executability conditions
+                impossible occurs(X) if instance(X, store),
+                                    object(X, O),
+                                    base(X, B),
+                                    stored_in(O, B).
+
+                impossible occurs(X) if instance(X, withdraw),
+                                    object(X, O),
+                                    base(X, B),
+                                    -stored_in(O, B).

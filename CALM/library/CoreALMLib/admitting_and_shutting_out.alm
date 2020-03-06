@@ -1,0 +1,75 @@
+theory admitting_and_shutting_out
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module admitting_and_shutting_out
+        depends on unobstructing_and_obstructing
+
+        sort declarations
+            admit :: unobstruct
+            shut_out :: obstruct
+
+        function declarations
+            fluents
+                defined
+                    is_shut_out : tangible_entity -> booleans
+
+        axioms
+            function definitions
+                is_shut_out(X) if shut_out_of(X, Y).
+
+            state constraints
+                is_obstructed(X) if is_shut_out(X).
+                -is_obstructed(X) if -is_shut_out(X).
+
+                false if instance(X, admit),
+                            object(X, O),
+                            -instance(X, tangible_entity).
+
+                false if instance(X, admit),
+                            -defined_base(X).
+
+                false if instance(X, admit),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, shut_out),
+                            object(X, O),
+                            -instance(X, tangible_entity).
+
+                false if instance(X, shut_out),
+                            -defined_base(X).
+
+                false if instance(X, shut_out),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -shut_out_of(O, B) if instance(X, admit),
+                                            object(X, O),
+                                            base(X, B).
+
+                occurs(X) causes shut_out_of(O, B) if instance(X, shut_out),
+                                            object(X, O),
+                                            base(X, B).
+
+            executability conditions
+                impossible occurs(X) if instance(X, admit),
+                                            object(X, O),
+                                            base(X, B),
+                                            -is_inside(O, B).
+
+                impossible occurs(X) if instance(X, admit),
+                                            object(X, O),
+                                            base(X, B),
+                                            -shut_out_of(O, B).
+ 
+                impossible occurs(X) if instance(X, shut_out),
+                                            object(X, O),
+                                            base(X, B),
+                                            -is_inside(O, B).
+
+                impossible occurs(X) if instance(X, shut_out),
+                                            object(X, O),
+                                            base(X, B),
+                                            shut_out_of(O, B).

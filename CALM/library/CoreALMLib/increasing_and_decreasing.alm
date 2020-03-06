@@ -1,0 +1,331 @@
+theory increasing_and_decreasing
+
+    import increasing_and_decreasing_fluents.increasing_and_decreasing_fluents from CALMFluents
+
+    module increasing_and_decreasing
+        depends on increasing_and_decreasing_fluents
+
+        sort declarations
+            modify_property_value :: actions
+                attributes
+                    affected_property : property
+
+            increase :: modify_property_value
+            decrease :: modify_property_value
+
+        function declarations
+            statics
+                basic
+                    greater_than : property_value * property_value -> booleans
+                    less_than : property_value * property_value -> booleans
+
+        object constants
+            age, animacy, area, breakability, brightness, capacity, color,
+                consistency, density, depth, height, length, mass, sentience,
+                sex, shape, size, smell, taste, temperature, texture, thickness,
+                trait, wetness, width, volume : entity_property
+
+        axioms
+            state constraints
+                false if instance(X, modify_property_value),
+                                    -defined_from_value(X).
+
+                false if instance(X, modify_property_value),
+                                    from_value(X, FV),
+                                    -instance(FV, property_value).
+
+                false if instance(X, modify_property_value),
+                                    -defined_to_value(X).
+
+                false if instance(X, modify_property_value),
+                                    from_value(X, FV),
+                                    to_value(X, TV),
+                                    instance(FV, S),
+                                    -instance(TV, S).
+
+                false if instance(X, increase),
+                                    from_value(X, FV),
+                                    to_value(X, TV),
+                                    -greater_than(TV, FV).
+
+                false if instance(X, increase),
+                                    from_value(X, FV),
+                                    to_value(X, TV),
+                                    -less_than(TV, FV).
+
+                greater_than(X, Y) if instance(X, numbers),
+                                    instance(Y, numbers),
+                                    X > Y.
+
+                -greater_than(X, Y) if instance(X, numbers),
+                                    instance(Y, numbers),
+                                    X <= Y.
+
+                less_than(X, Y) if instance(X, numbers),
+                                    instance(Y, numbers),
+                                    X < Y.
+
+                -less_than(X, Y) if instance(X, numbers),
+                                    instance(Y, numbers),
+                                    X >= Y.
+
+            dynamic causal laws
+                occurs(X) causes age(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = age,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes animacy(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = animacy,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes area(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = area,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes breakability(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = breakability,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes brightness(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = brightness,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes capacity(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = capacity,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes color(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = color,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes consistency(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = consistency,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes density(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = density,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes depth(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = depth,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes height(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = height,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes length(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = length,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes mass(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = mass,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes sentience(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = sentience,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes sex(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = sex,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes shape(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = shape,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes size(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = size,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes smell(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = smell,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes taste(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = taste,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes temperature(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = temperature,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes texture(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = texture,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes thickness(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = thickness,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes trait(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = trait,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes wetness(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = wetness,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes width(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = width,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes volume(B, TV) if instance(X, modify_property_value),
+                                        affected_property(X) = volume,
+                                        to_value(X, TV),
+                                        base(X, B).
+
+                occurs(X) causes -age(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = age,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -animacy(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = animacy,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -area(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = area,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -breakability(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = breakability,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -brightness(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = brightness,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -capacity(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = capacity,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -color(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = color,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -consistency(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = consistency,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -density(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = density,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -depth(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = depth,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -height(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = height,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -length(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = length,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -mass(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = mass,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -sentience(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = sentience,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -sex(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = sex,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -shape(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = shape,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -size(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = size,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -smell(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = smell,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -taste(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = taste,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -temperature(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = temperature,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -texture(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = texture,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -thickness(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = thickness,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -trait(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = trait,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -wetness(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = wetness,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -width(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = width,
+                                        from_value(X, FV),
+                                        base(X, B).
+
+                occurs(X) causes -volume(B, FV) if instance(X, modify_property_value),
+                                        affected_property(X) = volume,
+                                        from_value(X, FV),
+                                        base(X, B).

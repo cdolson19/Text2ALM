@@ -1,0 +1,37 @@
+theory taking_in
+
+    import container_motion.container_motion from CoreALMLib
+
+    module taking_in
+        depends on container_motion
+
+        sort declarations
+            take_in :: move_into
+            absorb :: take_in
+            eat :: take_in
+
+            substance :: tangible_entity
+            fluid_substance :: substance
+
+            organism :: living_entity
+            animal :: organism
+
+        axioms
+            state constraints
+                false if instance(X, take_in),
+                        -defined_agent(X).
+
+                false if instance(X, take_in),
+                        agent(X, A),
+                        -instance(A, tangible_entity).
+  
+                base(X, Y) if instance(X, take_in),
+                        agent(X, Y).
+
+                false if instance(X, absorb),
+                        object(X, O),
+                        -instance(X, fluid_substance).
+
+                false if instance(X, eat),
+                        agent(X, A),
+                        -instance(X, animal).

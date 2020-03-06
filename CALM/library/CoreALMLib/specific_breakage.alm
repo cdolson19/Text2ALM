@@ -1,0 +1,126 @@
+theory specific_breakage
+
+    import specific_impairment.specific_impairment from CoreALMLib
+
+    module specific_breakage
+        depends on specific_impairment
+
+        sort declarations
+            breach :: break
+            destroy :: break
+            divide :: break
+            ruin :: break
+            take_apart :: break
+
+        function declarations
+            statics
+                defined
+                    two_results_exist : divide -> booleans
+
+        axioms
+            state constraints
+                false if instance(X, breach),
+                        -defined_result(X).
+
+                false if instance(X, breach),
+                        result(X, R),
+                        -instance(R, spatial_entity).
+
+                false if instance(X, breach),
+                        agent(X, A),
+                        -instance(A, tangible_entity).
+
+                false if instance(X, divide),
+                        result(X, R1),
+                        result(X, R2),
+                        result(X, R3),
+                        R1 != R2,
+                        R2 != R3,
+                        R3 != R1.
+
+                false if instance(X, divide),
+                        -two_results_exist(X).
+
+                two_results_exist(X) if instance(X, divide),
+                                    result(X, R1),
+                                    result(X, R2),
+                                    R1 != R2.
+
+                false if instance(X, ruin),
+                        agent(X, A),
+                        -instance(A, tangible_entity).
+
+                false if instance(X, ruin),
+                        instrument(X, I),
+                        -instance(I, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes is_ruined(O) if instance(X, ruin),
+                                            object(X, O).
+
+                occurs(X) causes has_region(O, R) if instance(X, breach),
+                                            result(R),
+                                            object(O).
+
+                occurs(X) causes exists(R) if instance(X, divide),
+                                            result(X, R).
+
+                occurs(X) causes material(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            material(O, Y).
+
+                occurs(X) causes animacy(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            animacy(O, Y).
+
+                occurs(X) causes breakability(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            breakability(O, Y).
+
+                occurs(X) causes color(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            color(O, Y).
+
+                occurs(X) causes consistency(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            consistency(O, Y).
+
+                occurs(X) causes density(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            density(O, Y).
+
+                occurs(X) causes sentience(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            sentience(O, Y).
+
+                occurs(X) causes sex(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            sex(O, Y).
+
+                occurs(X) causes smell(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            smell(O, Y).
+
+                occurs(X) causes taste(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            taste(O, Y).
+
+                occurs(X) causes temperature(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            temperature(O, Y).
+
+                occurs(X) causes texture(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            texture(O, Y).
+
+                occurs(X) causes trait(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            trait(O, Y).
+
+                occurs(X) causes wetness(R, Y) if instance(X, divide),
+                                            object(X, O),
+                                            wetness(O, Y).
+
+                occurs(X) causes -has_part(O, P) if instance(X, take_apart),
+                                            object(X, O),
+                                            has_part(O, P).

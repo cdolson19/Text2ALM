@@ -1,0 +1,207 @@
+theory contact_and_attachment
+
+    import contact_and_attachment_fluents.contact_and_attachment_fluents from CALMFluents
+
+    module contact_and_attachment
+        depends on contact_and_attachment_fluents
+
+        sort declarations
+            attach :: actions
+            detach :: actions
+            make_contact :: actions
+            %break_contact :: actions
+
+            collide :: make_contact
+                attributes
+                    intensity : intensity_value
+
+            property_group :: thing
+            property_value :: property_group
+            intensity_value :: property_value
+
+        object constants
+            strong : intensity_value
+
+        axioms
+            state constraints
+                is_touching(X, Y) if is_attached_to(X, Y).
+                -is_attached_to(X, Y) if -is_touching(X, Y).
+
+                is_touching(X, Y) if is_touching(Y, X).
+                -is_touching(X, Y) if -is_touching(Y, X).
+
+                is_attached_to(X, Y) if is_attached_to(Y, X).
+                -is_attached_to(X, Y) if -is_attached_to(Y, X).
+
+                abuts(X, Y) if abuts(Y, X).
+                -abuts(X, Y) if -abuts(Y, X).
+
+                false if instance(X, attach),
+                            -defined_object(X).
+
+                false if instance(X, attach),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, attach),
+                            object(X, O1),
+                            object(X, O2),
+                            instance(O1, tangible_entity),
+                            instance(O2, tangible_entity),
+                            O1 != O2.
+
+                false if instance(X, attach),
+                            -defined_base(X).
+
+                false if instance(X, attach),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, attach),
+                            base(X, B1),
+                            base(X, B2),
+                            instance(B1, tangible_entity),
+                            instance(B2, tangible_entity),
+                            B1 != B2.
+
+                false if instance(X, detach),
+                            -defined_object(X).
+
+                false if instance(X, detach),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, detach),
+                            object(X, O1),
+                            object(X, O2),
+                            instance(O1, tangible_entity),
+                            instance(O2, tangible_entity),
+                            O1 != O2.
+
+                false if instance(X, detach),
+                            -defined_base(X).
+
+                false if instance(X, detach),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, detach),
+                            base(X, B1),
+                            base(X, B2),
+                            instance(B1, tangible_entity),
+                            instance(B2, tangible_entity),
+                            B1 != B2.
+
+                false if instance(X, make_contact),
+                            -defined_object(X).
+
+                false if instance(X, make_contact),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, make_contact),
+                            object(X, O1),
+                            object(X, O2),
+                            instance(O1, tangible_entity),
+                            instance(O2, tangible_entity),
+                            O1 != O2.
+
+                false if instance(X, make_contact),
+                            -defined_base(X).
+
+                false if instance(X, make_contact),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, make_contact),
+                            base(X, B1),
+                            base(X, B2),
+                            instance(B1, tangible_entity),
+                            instance(B2, tangible_entity),
+                            B1 != B2.
+
+                intensity(X) = strong if instance(X, collide).
+
+                false if instance(X, break_contact),
+                            -defined_object(X).
+
+                false if instance(X, break_contact),
+                            object(X, O),
+                            -instance(O, tangible_entity).
+
+                false if instance(X, break_contact),
+                            object(X, O1),
+                            object(X, O2),
+                            instance(O1, tangible_entity),
+                            instance(O2, tangible_entity),
+                            O1 != O2.
+
+                false if instance(X, break_contact),
+                            -defined_base(X).
+
+                false if instance(X, break_contact),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, break_contact),
+                        base(X, B1),
+                        base(X, B2),
+                        instance(B1, tangible_entity),
+                        instance(B2, tangible_entity),
+                        B1 != B2.
+
+            dynamic causal laws
+                occurs(X) causes is_attached_to(O, B) if instance(X, attach),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -is_attached_to(O, B) if instance(X, detach),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes is_touching(O, B) if instance(X, make_contact),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes abuts(O, B) if instance(X, make_contact),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -is_touching(O, B) if instance(X, break_contact),
+                                                object(X, O),
+                                                base(X, B).
+
+                occurs(X) causes -abuts(O, B) if instance(X, break_contact),
+                                                object(X, O),
+                                                base(X, B).
+
+            executability conditions
+                impossible occurs(X) if instance(X, attach),
+                                        object(X, O),
+                                        base(X, B),
+                                        is_attached_to(O, B).
+
+                impossible occurs(X) if instance(X, detach),
+                                        object(X, O),
+                                        base(X, B),
+                                        -is_attached_to(O, B).
+
+                impossible occurs(X) if instance(X, break_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        -is_touching(O, B).
+
+                impossible occurs(X) if instance(X, break_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        -abuts(O, B).
+
+                impossible occurs(X) if instance(X, make_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        is_touching(O, B).
+
+                impossible occurs(X) if instance(X, make_contact),
+                                        object(X, O),
+                                        base(X, B),
+                                        abuts(O, B).

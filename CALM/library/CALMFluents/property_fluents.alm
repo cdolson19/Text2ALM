@@ -1,0 +1,58 @@
+theory property_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+
+    module property_sorts
+        depends on entity_event_and_action
+        sort declarations
+            property_group :: thing
+            property_value :: property_group
+            property :: universe
+            entity_property :: property
+
+    module characteristic_fluents
+        depends on property_sorts
+        sort declarations
+            animacy_value, area_value, breakability_value, brightness_value, capacity_value,
+                color_value, consistency_value, duration_value,
+                sentience_value, sex_value,
+                smell_value, taste_value, temperature_value,
+                texture_value, trait_value, wetness_value :: property_value
+
+        function declarations
+            fluents
+                basic
+                    age : entity * duration_value -> booleans
+                    animacy : entity * animacy_value -> booleans
+                    area : spatial_entity * area_value -> booleans
+                    breakability : tangible_entity * breakability_value -> booleans
+                    brightness : tangible_entity * brightness_value -> booleans
+                    capacity : spatial_entity * capacity_value -> booleans
+                    color : spatial_entity * color_value -> booleans
+                    consistency : tangible_entity * consistency_value -> booleans
+                    material : tangible_entity * tangible_entity -> booleans
+                    sentience : living_entity * sentience_value -> booleans
+                    sex : living_entity * sex_value -> booleans
+                    smell : tangible_entity * smell_value -> booleans
+                    taste : tangible_entity * taste_value -> booleans
+                    temperature : tangible_entity * temperature_value -> booleans
+                    texture : tangible_entity * texture_value -> booleans
+                    trait : entity * trait_value -> booleans
+                    wetness : tangible_entity * wetness_value -> booleans
+
+    module measurement_fluents
+        depends on property_sorts
+        sort declarations
+                density_value, length_value, mass_value, shape_value, size_value, thickness_value, volume_value :: property_value
+        function declarations
+            fluents
+                basic
+                    density : tangible_entity * density_value -> booleans
+                    depth : spatial_entity * length_value -> booleans
+                    height : spatial_entity * length_value -> booleans
+                    length : spatial_entity * length_value -> booleans
+                    mass : tangible_entity * mass_value -> booleans
+                    shape : tangible_entity * shape_value -> booleans
+                    size : spatial_entity * size_value -> booleans
+                    thickness : spatial_entity * thickness_value -> booleans
+                    width : spatial_entity * length_value -> booleans
+                    volume : tangible_entity * volume_value -> booleans

@@ -1,0 +1,15 @@
+theory impairment_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.part_fluents from CALMFluents
+    import property_fluents.characteristic_fluents from CALMFluents
+
+    module impairment_fluents
+        depends on entity_event_and_action, characteristic_fluents, part_fluents
+        function declarations
+            fluents
+                basic
+                    exists : entity -> booleans
+                    has_region : tangible_entity * spatial_entity -> booleans
+                    is_broken : entity -> booleans
+                    is_damaged : entity -> booleans
+                    is_ruined : entity -> booleans

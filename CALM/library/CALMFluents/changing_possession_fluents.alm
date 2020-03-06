@@ -1,0 +1,13 @@
+theory changing_possession_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.abuts_fluents from CALMFluents
+    import fluents.possession_fluents from CALMFluents
+    import fluents.held_by_fluents from CALMFluents
+    import fluents.location_fluents from CALMFluents
+
+    module changing_possession_fluents
+        depends on entity_event_and_action,
+                    abuts_fluents,
+                    held_by_fluents,
+                    location_fluents,
+                    possession_fluents

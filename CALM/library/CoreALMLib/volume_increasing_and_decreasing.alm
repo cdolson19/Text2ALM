@@ -1,0 +1,51 @@
+theory volume_increasing_and_decreasing
+
+    import increasing_and_decreasing.increasing_and_decreasing from CoreALMLib
+
+    module volume_increasing_and_decreasing
+        depends on increasing_and_decreasing
+
+        sort declarations
+            expand :: increase
+
+            contract :: decrease
+
+        axioms
+            state constraints
+                affected_property(X) = volume if instance(X, expand).
+
+                false if instance(X, expand),
+                        from_value(X, FV),
+                        -instance(FV, volume_value).
+
+                false if instance(X, expand),
+                        -defined_base(X).
+
+                false if instance(X, expand),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+                affected_property(X) = volume if instance(X, contract).
+
+                false if instance(X, contract),
+                        from_value(X, FV),
+                        -instance(FV, volume_value).
+
+                false if instance(X, contract),
+                        -defined_base(X).
+
+                false if instance(X, contract),
+                        base(X, B),
+                        -instance(B, tangible_entity).
+
+            executability conditions
+                impossible occurs(X) if instance(X, expand),
+                                        from_value(X, FV),
+                                        base(X, B),
+                                        -volume(B, FV).
+
+                impossible occurs(X) if instance(X, contract),
+                                        from_value(X, FV),
+                                        base(X, B),
+                                        -volume(B, FV).
+    

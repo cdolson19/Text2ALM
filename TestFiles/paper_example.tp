@@ -1,0 +1,35 @@
+system description JS_discourse
+  theory JS_discourse_theory
+    module JS_discourse_module
+      sort declarations
+        points, agents :: universe
+        move :: actions
+          attributes
+            actor : agents -> booleans
+            origin : points	-> booleans
+            destination : points -> booleans
+      function declarations
+        fluents
+          basic
+            loc_in : agents * points -> booleans
+      axioms
+        dynamic causal laws
+          occurs(X) causes loc_in(A,D) if instance(X,move), actor(X,A), destination(X,D).
+        executability conditions
+          impossible occurs(X) if instance(X,move), actor(X,A), loc_in(A,P), origin(X,O), P!=O.
+          impossible occurs(X) if instance(X,move), actor(X,A), loc_in(A,P), destination(X,D), P=D.
+  structure john_and_sandra
+    instances
+      j, s in agents
+      h in points
+      ajin in move
+        actor(j) = true
+        destination(h) = true
+      asin in move
+        actor(s) = true
+        destination(h) = true
+temporal projection
+max steps 3
+history
+  happened(ajin, 0).
+  happened(asin, 1).

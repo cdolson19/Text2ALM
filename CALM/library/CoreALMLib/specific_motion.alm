@@ -1,0 +1,75 @@
+theory specific_motion
+
+    import motion.motion from CoreALMLib
+
+    module specific_motion
+        depends on motion
+
+        sort declarations
+            emit :: move
+            slide :: move
+            rotate :: move
+            propel :: move
+            fall :: move
+            transmit :: move
+
+            substance :: tangible_entity
+            fluid_substance :: substance
+
+            energy :: tangible_entity
+
+        axioms
+            state constraints
+                false if instance(X, emit),
+                            object(X, O),
+                            -instance(X, fluid_substance),
+                            -instance(X, energy).
+
+                object(X, Y) if instance(X, emit),
+                            agent(X, Y).
+
+                object(X, Y) if instance(X, emit),
+                            -defined_agent(X),
+                            instrument(X, Y).
+
+                false if instance(X, slide),
+                            -defined_path(X).
+
+                false if instance(X, slide),
+                            path(X, P),
+                            -instance(P, tangible_entity).
+
+                false if instance(X, propel),
+                            -defined_toward(X).
+
+                destination(X, Y) if instance(X, propel),
+                            toward(X, Y).
+
+                false if instance(X, fall),
+                            defined_agent(X).
+
+                false if instance(X, transmit),
+                            recipient(X, R),
+                            -instance(R, tangible_entity).
+
+                false if instance(X, transmit),
+                            agent(X, A),
+                            -instance(A, tangible_entity).
+
+                false if instance(X, transmit),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                false if instance(X, transmit),
+                            instrument(X, I),
+                            -instance(I, tangible_entity).
+
+                destination(X, L) if instance(X, transmit),
+                            recipient(X, R),
+                            location(R, L).
+
+            executability conditions
+                impossible occurs(X) if instance(X, propel),
+                            object(X, O),
+                            agent(X, A),
+                            -is_near(A, O).

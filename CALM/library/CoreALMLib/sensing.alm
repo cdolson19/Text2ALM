@@ -1,0 +1,56 @@
+theory sensing
+
+    import creating.creating from CoreALMLib
+
+    module sensing
+        depends on creating
+
+        sort declarations
+            sense :: create
+            hear :: sense
+            read :: sense
+            see :: sense
+
+            energy :: tangible_entity
+            sound :: energy
+            light :: energy
+
+            physical_object :: tangible_entity
+            inanimate_object :: physical_object
+            artifact :: inanimate_object
+            physical_document :: artifact
+
+        axioms
+            state constraints
+                false if instance(X, sense),
+                        -defined_object(X).
+
+                false if instance(X, sense),
+                        object(X, O),
+                        -instance(O, tangible_entity).
+
+                false if instance(X, sense),
+                        -defined_experiencer(X).
+
+                false if instance(X, sense),
+                        experiencer(X, E),
+                        -instance(E, tangible_entity).
+
+                false if instance(X, sense),
+                        result(X, R),
+                        -instance(R, message).
+
+                agent(X, Y) if instance(X, sense),
+                        experiencer(X, Y).
+
+                false if instance(X, hear),
+                        object(X, O),
+                        -instance(O, sound).
+
+                false if instance(X, read),
+                        object(X, O),
+                        -instance(O, physical_document).
+
+                false if instance(X, see),
+                        object(X, O),
+                        -instance(O, light).

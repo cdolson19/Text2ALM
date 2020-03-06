@@ -1,0 +1,50 @@
+theory light_increasing_and_decreasing
+
+    import increasing_and_decreasing.increasing_and_decreasing from CoreALMLib
+
+    module light_increasing_and_decreasing
+        depends on increasing_and_decreasing
+
+        sort declarations
+            brighten :: increase
+
+            dim :: decrease
+
+        axioms
+            state constraints
+                affected_property(X) = brightness if instance(X, brightness).
+
+                false if instance(X, brighten),
+                            from_value(X, FV),
+                            -instance(FV, brightness_value).
+
+                false if instance(X, brighten),
+                            -defined_base(X).
+
+                false if instance(X, brighten),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+                affected_property(X) = brightness if instance(X, dim).
+
+                false if instance(X, dim),
+                            from_value(X, FV),
+                            -instance(FV, brightness_value).
+
+                false if instance(X, dim),
+                            -defined_base(X).
+
+                false if instance(X, dim),
+                            base(X, B),
+                            -instance(B, tangible_entity).
+
+            executability conditions
+                impossible occurs(X) if instance(X, brighten),
+                                        from_value(X, FV),
+                                        base(X, B),
+                                        -breakability(B, FV).
+
+                impossible occurs(X) if instance(X, dim),
+                                        from_value(X, FV),
+                                        base(X, B),
+                                        -breakability(B, FV).

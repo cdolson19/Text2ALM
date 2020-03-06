@@ -1,0 +1,64 @@
+theory unrestraining_and_restraining
+
+    import unobstructing_and_obstructing.unobstructing_and_obstructing from CoreALMLib
+
+    module unrestraining_and_restraining
+        depends on unobstructing_and_obstructing
+
+        sort declarations
+            unrestrain :: unobstruct
+            restrain :: obstruct
+
+        axioms
+            state constraints
+                is_restrained(O) if restrained_by(O, A).
+                -restrained_by(O, A) if -is_restrained(O).
+
+                is_obstructed(X) if is_restrained(X).
+                -is_obstructed(X) if -is_restrained(X).
+
+                false if instance(X, unrestrain),
+                        object(X, O),
+                        -instance(X, tangible_entity).
+
+                false if instance(X, restrain),
+                        object(X, O),
+                        -instance(X, tangible_entity).
+
+            dynamic causal laws
+                occurs(X) causes -is_restrained(O) if instance(X, unrestrain),
+                                                object(X, O),
+                                                -defined_agent(X).
+
+                occurs(X) causes -restrained_by(O, A) if instance(X, unrestrain),
+                                                object(X, O),
+                                                agent(X, A).
+
+                occurs(X) causes is_restrained(O) if instance(X, restrain),
+                                                object(X, O),
+                                                -defined_agent(X).
+
+                occurs(X) causes restrained_by(O, A) if instance(X, restrain),
+                                                object(X, O),
+                                                agent(X, A).
+
+            executability conditions
+                impossible occurs(X) if instance(X, unrestrain),
+                                        object(X, O),
+                                        -defined_agent(X),
+                                        -is_restrained(O).
+
+                impossible occurs(X) if instance(X, unrestrain),
+                                        object(X, O),
+                                        agent(X, A),
+                                        -restrained_by(O, A).
+
+                impossible occurs(X) if instance(X, restrain),
+                                        object(X, O),
+                                        -defined_agent(X),
+                                        -is_restrained(O).
+
+                impossible occurs(X) if instance(X, restrain),
+                                        object(X, O),
+                                        agent(X, A),
+                                        restrained_by(O, A).

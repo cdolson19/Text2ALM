@@ -1,0 +1,6 @@
+theory communication_fluents
+    import entity_event_and_action.entity_event_and_action from CoreALMLib
+    import fluents.known_fluents from CALMFluents
+
+    module communication_fluents
+        depends on entity_event_and_action, known_fluents

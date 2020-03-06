@@ -1,0 +1,22 @@
+theory ext_accessibility
+
+    import accessibility.accessibility from CoreALMLib
+
+    module ext_accessibility
+        depends on accessibility
+
+        axioms
+            executability conditions
+                impossible occurs(X) if instance(X, actions),
+                                    agent(X, A),
+                                    instrument(X, I),
+                                    -accessible_to(I, A).
+
+                impossible occurs(X) if instance(X, actions),
+                                    instrument(X, I),
+                                    -accessible(I).
+
+                impossible occurs(X) if instance(X, actions),
+                                    agent(X, A),
+                                    object(X, O),
+                                    -accessible_to(O, A).

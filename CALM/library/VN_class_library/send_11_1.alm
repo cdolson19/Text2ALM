@@ -1,0 +1,44 @@
+theory send_11_1
+
+	import motion.motion from CoreALMLib
+	import specific_loss_of_possession.specific_loss_of_possession from CoreALMLib
+
+	module send_11_1
+		depends on motion
+		% VerbNet class send_11_1 has 16 member verbs: (post, transfer, deliver, dispatch, drive, return, transship, export, handdeliver, shunt, import, port, convey, pass_on, transport, shift)
+
+		sort declarations
+			send_11_1 :: move
+
+		axioms
+			state constraints
+				agent(A, B) if instance(A, send_11_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, send_11_1),
+				                vn_destination(A, B).
+				origin(A, B) if instance(A, send_11_1),
+				                vn_initial_location(A, B).
+				object(A, B) if instance(A, send_11_1),
+				                vn_theme(A, B).
+
+	module send_11_1_1
+		depends on specific_loss_of_possession
+		% VerbNet class send_11_1_1 has 15 member verbs: (transmit, hand, UPS, send, express, mail, airmail, slip, forward, ship, pass, wire, sneak, FedEx, smuggle)
+
+		sort declarations
+			send_11_1_1 :: give
+
+		axioms
+			state constraints
+			    recipient(A, B) if instance(A, send_11_1_1),
+				                vn_destination(A, B).
+				agent(A, B) if instance(A, send_11_1_1),
+				                vn_agent(A, B).
+                donor(A, B) if instance(A, send_11_1_1),
+				                vn_agent(A, B).
+				destination(A, B) if instance(A, send_11_1_1),
+				                vn_destination(A, B).
+				origin(A, B) if instance(A, send_11_1_1),
+				                vn_initial_location(A, B).
+				object(A, B) if instance(A, send_11_1_1),
+				                vn_theme(A, B).
