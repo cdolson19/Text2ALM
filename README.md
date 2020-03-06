@@ -100,7 +100,10 @@ system description example
 Calm is an ALM implementation developed at Texas Tech University. The sytsem uses an ALM system description to produce an answer set of the system states.
 
 ### Stanford CoreNLP ###
-To start local server: `java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000`
+
+
+### LTH SRL ###
+
 
 ## Additional Tool Subsystems ##
 ### BABI Parser ###
