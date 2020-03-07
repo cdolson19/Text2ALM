@@ -1,5 +1,5 @@
 import FilePaths
-from pathlib2 import Path
+
 
 def main():
 
