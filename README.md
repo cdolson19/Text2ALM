@@ -1,10 +1,13 @@
 # Text2ALM #
 
-My Thesis Project. 
+A Thesis Project developed at the University of Nebraska Omaha by Craig Olson and Dr. Yuliya Lierler.
+
+## Publications Related to this Work ##
+* Processing Narratives by Means of Action Languages. [2019 Thesis Report](https://digitalcommons.unomaha.edu/compscistudent/1/)
+* Information Extraction Tool Text2ALM: From Narratives to Action Language System Descriptions. [ICLP 2019 Report](https://works.bepress.com/yuliya_lierler/86/)
+* An Architecture of Semantic Information Extraction Tool Text2ALM. [OSTIS 2020 Report](https://works.bepress.com/yuliya_lierler/91/)
 
 ## What is this repository for? ##
-
-**Text2ALM** is written in Python3.
 
 * Text2ALM takes narrative text as input and uses the VerbNet ontology to output an answer set of narrative properties.
 * The goal of the system is support Question Answering tasks about a narrative by outputing an answer set of elements that can be queried. 
