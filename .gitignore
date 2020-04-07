@@ -13,9 +13,9 @@ TestFiles/BABI_Tests/tasks_1-20_v1-2/en-valid-10k
 TestFiles/BABI_Tests/tasks_1-20_v1-2/en-10k
 Output/BABIParser_Outputs/*
 Output/Logs/*
-Output/Text2ALM_Outputs/
+Output/Text2ALM_Outputs/*
 Output/VerbNetALMGenerator_Outputs/*
-Output/BABITestResults/
+Output/BABITestResults/*
 Resources/srl-20131216
 Resources/stanford-corenlp-full-2018-10-05
 Resources/models
@@ -124,3 +124,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# don't ignore the __init__ files in the output directories.
+!Output/BABIParser_Outputs/__init__.py
+!Output/Logs/__init__.py
+!Output/Text2ALM_Outputs/__init__.py
+!Output/VerbNetALMGenerator_Outputs/__init__.py
+!Output/BABITestResults/__init__.py
