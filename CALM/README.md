@@ -1,4 +1,4 @@
-# VerbNetCALM
+# CALM
 
 This version of CALM is a special distribution to follow the paper submitted to NMR-2018.  This version works natively on windows systems.  
 
